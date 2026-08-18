@@ -15,7 +15,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #010308;
   color: white;
-
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -78,15 +77,19 @@ textarea {
 
 /* =========================================
    NAVBAR
+   GLASS + TRAVELING BORDER
 ========================================= */
 
 .navbar {
   width: calc(100% - 70px);
   max-width: 1250px;
 
+  height: 70px;
   min-height: 70px;
 
   margin: 16px auto 0;
+
+  padding: 0 25px;
 
   border-radius: 18px;
 
@@ -94,36 +97,32 @@ textarea {
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 25px;
-
   flex-shrink: 0;
 
   position: relative;
 
-  z-index: 10;
-}
-
-
-/* =========================================
-   HOME NAVBAR
-   GLASS + TRAVELING BORDER
-========================================= */
-
-.home-navbar {
-
-  background: rgba(3, 13, 28, 0.30);
-
-  border: 1px solid rgba(0, 200, 255, 0.18);
+  /*
+    IMPORTANT:
+    Transparent glass background.
+  */
+  background: rgba(3, 13, 28, 0.25);
 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
-  border-radius: 18px;
+  /*
+    Very faint normal border.
+  */
+  border: 1px solid rgba(0, 200, 255, 0.20);
 
+  /*
+    Keep the moving glow inside the navbar.
+  */
   overflow: hidden;
 
-  box-shadow: none;
-
+  /*
+    Creates separate stacking layer.
+  */
   isolation: isolate;
 
   animation: navAnimation 0.7s ease;
@@ -131,96 +130,119 @@ textarea {
 
 
 /* =========================================
-   SVG BORDER
+   TRAVELING GLOW
 ========================================= */
 
-.navbar-border {
+.navbar::before {
+
+  content: "";
 
   position: absolute;
 
-  left: 0;
-  top: 0;
+  /*
+    Make the animated layer slightly larger
+    than the navbar.
+  */
+  inset: -60%;
 
-  width: 100%;
-  height: 100%;
+  /*
+    This is the important part.
+    Only a small section is bright.
+  */
+  background:
+    conic-gradient(
+      from 0deg,
+
+      transparent 0deg,
+
+      transparent 320deg,
+
+      rgba(0, 255, 255, 0.15) 330deg,
+
+      #00ffff 338deg,
+
+      #008cff 344deg,
+
+      #a855f7 350deg,
+
+      rgba(168, 85, 247, 0.15) 356deg,
+
+      transparent 360deg
+    );
+
+  /*
+    Cut out the middle.
+
+    This means the color appears ONLY
+    around the border, not inside the navbar.
+  */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+
+  -webkit-mask-composite: xor;
+
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+
+  mask-composite: exclude;
+
+  /*
+    Border thickness.
+  */
+  padding: 61%;
+
+  /*
+    Glow movement.
+  */
+  animation: navbarGlowTravel 5s linear infinite;
+
+  /*
+    Glow softness.
+  */
+  filter:
+    drop-shadow(0 0 3px #00ffff)
+    drop-shadow(0 0 8px rgba(0, 180, 255, 0.8))
+    drop-shadow(0 0 14px rgba(0, 120, 255, 0.45));
 
   pointer-events: none;
 
   z-index: 1;
-
-  overflow: visible;
 }
 
 
 /* =========================================
-   FAINT BORDER
+   SECOND VERY SOFT GLOW
 ========================================= */
 
-.navbar-border-base {
+.navbar::after {
 
-  fill: none;
+  content: "";
 
-  stroke: rgba(0, 200, 255, 0.18);
+  position: absolute;
 
-  stroke-width: 1.5;
+  inset: 0;
+
+  border-radius: 18px;
+
+  border: 1px solid rgba(0, 210, 255, 0.08);
+
+  box-shadow:
+    inset 0 0 12px rgba(0, 170, 255, 0.04);
+
+  pointer-events: none;
+
+  z-index: 1;
 }
 
 
 /* =========================================
-   TRAVELING GLOW
+   MAKE CONTENT STAY ABOVE BORDER
 ========================================= */
 
-.navbar-border-moving {
-
-  fill: none;
-
-  stroke: url(#borderGradient);
-
-  stroke-width: 2.5;
-
-  stroke-linecap: round;
-
-  stroke-linejoin: round;
-
-  filter: url(#borderGlow);
-
-  /*
-    One small glowing section.
-    The remaining part is invisible.
-  */
-
-  stroke-dasharray: 90 910;
-
-  stroke-dashoffset: 0;
-
-  animation:
-    borderTravel 5s linear infinite;
-}
-
-
-/* =========================================
-   BORDER TRAVEL ANIMATION
-========================================= */
-
-@keyframes borderTravel {
-
-  from {
-    stroke-dashoffset: 1000;
-  }
-
-  to {
-    stroke-dashoffset: 0;
-  }
-
-}
-
-
-/* =========================================
-   NAVBAR CONTENT
-========================================= */
-
-.home-navbar .logo,
-.home-navbar .nav-links {
+.navbar .logo,
+.navbar .nav-links {
 
   position: relative;
 
@@ -229,11 +251,27 @@ textarea {
 
 
 /* =========================================
+   BORDER TRAVEL ANIMATION
+========================================= */
+
+@keyframes navbarGlowTravel {
+
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================================
    LOGO
 ========================================= */
 
 .logo {
-
   padding: 11px 25px;
 
   border: 1px solid rgba(0, 200, 255, 0.65);
@@ -257,7 +295,6 @@ textarea {
 }
 
 .logo:hover {
-
   color: #00d9ff;
 
   border-color: #00d9ff;
@@ -274,16 +311,12 @@ textarea {
 ========================================= */
 
 .nav-links {
-
   display: flex;
-
   align-items: center;
-
   gap: 38px;
 }
 
 .nav-link {
-
   color: #d6e6f2;
 
   font-size: 15px;
@@ -294,12 +327,10 @@ textarea {
 }
 
 .nav-link:hover {
-
   color: #00d9ff;
 }
 
 .nav-link.active {
-
   color: #00d9ff;
 
   text-shadow:
@@ -307,7 +338,6 @@ textarea {
 }
 
 .nav-link.active::after {
-
   content: "";
 
   position: absolute;
@@ -331,7 +361,6 @@ textarea {
 ========================================= */
 
 .home-page {
-
   flex: 1;
 
   display: flex;
@@ -344,7 +373,6 @@ textarea {
 }
 
 .hero {
-
   width: min(100%, 980px);
 
   min-height: 430px;
@@ -365,7 +393,6 @@ textarea {
 }
 
 .hero::after {
-
   content: "";
 
   position: absolute;
@@ -382,7 +409,6 @@ textarea {
 }
 
 .hero-content {
-
   position: relative;
 
   z-index: 2;
@@ -391,7 +417,6 @@ textarea {
 }
 
 .small-title {
-
   color: #00d9ff;
 
   font-size: 12px;
@@ -404,7 +429,6 @@ textarea {
 }
 
 .hero h1 {
-
   font-size: clamp(50px, 6vw, 76px);
 
   line-height: 1;
@@ -416,7 +440,6 @@ textarea {
 
 .hero h1 span,
 h1 span {
-
   color: #00d9ff;
 
   text-shadow:
@@ -424,7 +447,6 @@ h1 span {
 }
 
 .hero h2 {
-
   font-size: 21px;
 
   font-weight: 500;
@@ -435,7 +457,6 @@ h1 span {
 }
 
 .hero-description {
-
   max-width: 680px;
 
   color: #b8c9d7;
@@ -453,14 +474,12 @@ h1 span {
 ========================================= */
 
 .hero-buttons {
-
   display: flex;
 
   gap: 15px;
 }
 
 .btn {
-
   display: inline-flex;
 
   align-items: center;
@@ -483,7 +502,6 @@ h1 span {
 }
 
 .primary-btn {
-
   background: #00cfff;
 
   color: #001019;
@@ -497,7 +515,6 @@ h1 span {
 }
 
 .primary-btn:hover {
-
   transform: translateY(-3px);
 
   box-shadow:
@@ -505,7 +522,6 @@ h1 span {
 }
 
 .secondary-btn {
-
   background: rgba(0, 15, 30, 0.4);
 
   color: white;
@@ -514,7 +530,6 @@ h1 span {
 }
 
 .secondary-btn:hover {
-
   color: #00d9ff;
 
   border-color: #00d9ff;
@@ -531,7 +546,6 @@ h1 span {
 ========================================= */
 
 .inner-page {
-
   flex: 1;
 
   display: flex;
@@ -546,7 +560,6 @@ h1 span {
 }
 
 .page-card {
-
   width: min(100%, 1080px);
 
   border-radius: 25px;
@@ -559,12 +572,10 @@ h1 span {
 }
 
 .page-heading {
-
   margin-bottom: 32px;
 }
 
 .page-heading h1 {
-
   font-size: 52px;
 
   text-transform: uppercase;
@@ -573,7 +584,6 @@ h1 span {
 }
 
 .heading-description {
-
   color: #9fb4c4;
 
   line-height: 1.6;
@@ -585,7 +595,6 @@ h1 span {
 ========================================= */
 
 .about-content {
-
   display: grid;
 
   grid-template-columns: 0.8fr 1.4fr;
@@ -598,7 +607,6 @@ h1 span {
 }
 
 .about-left h2 {
-
   font-size: 39px;
 
   line-height: 1.25;
@@ -607,7 +615,6 @@ h1 span {
 }
 
 .cyan-text {
-
   color: #00d9ff !important;
 
   text-shadow:
@@ -615,7 +622,6 @@ h1 span {
 }
 
 .about-right {
-
   color: #b7c9d8;
 
   line-height: 1.75;
@@ -624,12 +630,10 @@ h1 span {
 }
 
 .about-right p {
-
   margin-bottom: 15px;
 }
 
 .about-boxes {
-
   display: grid;
 
   grid-template-columns: repeat(3, 1fr);
@@ -638,7 +642,6 @@ h1 span {
 }
 
 .info-box {
-
   border-radius: 14px;
 
   padding: 20px;
@@ -647,7 +650,6 @@ h1 span {
 }
 
 .info-box:hover {
-
   border-color: #00d9ff;
 
   transform: translateY(-4px);
@@ -657,7 +659,6 @@ h1 span {
 }
 
 .info-box h3 {
-
   color: #00d9ff;
 
   margin-bottom: 8px;
@@ -666,7 +667,6 @@ h1 span {
 }
 
 .info-box p {
-
   color: #d5e4ef;
 
   font-size: 13px;
@@ -678,7 +678,6 @@ h1 span {
 ========================================= */
 
 .skills-grid {
-
   display: grid;
 
   grid-template-columns: repeat(4, 1fr);
@@ -687,7 +686,6 @@ h1 span {
 }
 
 .skill-card {
-
   height: 125px;
 
   border-radius: 16px;
@@ -708,7 +706,6 @@ h1 span {
 }
 
 .skill-card:hover {
-
   transform: translateY(-7px);
 
   border-color: #00d9ff;
@@ -718,7 +715,6 @@ h1 span {
 }
 
 .skill-symbol {
-
   font-size: 26px;
 
   font-weight: 800;
@@ -730,14 +726,12 @@ h1 span {
 }
 
 .skill-card h3 {
-
   font-size: 14px;
 
   color: white;
 }
 
 .skill-line {
-
   width: 25px;
 
   height: 2px;
@@ -754,12 +748,10 @@ h1 span {
 ========================================= */
 
 .projects-list {
-
   margin-top: 15px;
 }
 
 .project-card {
-
   min-height: 240px;
 
   border-radius: 20px;
@@ -776,7 +768,6 @@ h1 span {
 }
 
 .project-card:hover {
-
   transform: translateY(-5px);
 
   border-color: #00d9ff;
@@ -786,7 +777,6 @@ h1 span {
 }
 
 .project-icon {
-
   width: 110px;
 
   height: 110px;
@@ -814,12 +804,10 @@ h1 span {
 }
 
 .project-details {
-
   flex: 1;
 }
 
 .project-type {
-
   color: #00d9ff;
 
   font-size: 11px;
@@ -830,14 +818,12 @@ h1 span {
 }
 
 .project-details h2 {
-
   font-size: 28px;
 
   margin-bottom: 12px;
 }
 
 .project-details > p {
-
   color: #afc2d1;
 
   line-height: 1.7;
@@ -848,7 +834,6 @@ h1 span {
 }
 
 .technology-list {
-
   display: flex;
 
   gap: 8px;
@@ -857,7 +842,6 @@ h1 span {
 }
 
 .technology-list span {
-
   padding: 6px 11px;
 
   border-radius: 20px;
@@ -872,7 +856,6 @@ h1 span {
 }
 
 .project-arrow {
-
   font-size: 30px;
 
   color: #00d9ff;
@@ -881,12 +864,10 @@ h1 span {
 }
 
 .project-card:hover .project-arrow {
-
   transform: translate(5px, -5px);
 }
 
 .project-contact-btn {
-
   display: block;
 
   width: fit-content;
@@ -907,7 +888,6 @@ h1 span {
 }
 
 .project-contact-btn:hover {
-
   background: rgba(0, 200, 255, 0.1);
 
   border-color: #00d9ff;
@@ -924,7 +904,6 @@ h1 span {
 ========================================= */
 
 .contact-card {
-
   display: grid;
 
   grid-template-columns: 1fr 1fr;
@@ -935,7 +914,6 @@ h1 span {
 }
 
 .contact-left h1 {
-
   font-size: 52px;
 
   text-transform: uppercase;
@@ -944,7 +922,6 @@ h1 span {
 }
 
 .contact-description {
-
   color: #aebfce;
 
   line-height: 1.7;
@@ -955,7 +932,6 @@ h1 span {
 }
 
 .contact-info {
-
   display: flex;
 
   flex-direction: column;
@@ -964,7 +940,6 @@ h1 span {
 }
 
 .contact-item {
-
   display: flex;
 
   align-items: center;
@@ -977,7 +952,6 @@ h1 span {
 }
 
 .contact-symbol {
-
   width: 42px;
 
   height: 42px;
@@ -998,14 +972,12 @@ h1 span {
 }
 
 .contact-item small {
-
   color: #00d9ff;
 
   font-size: 11px;
 }
 
 .contact-item p {
-
   color: #d7e6f0;
 
   font-size: 13px;
@@ -1014,7 +986,6 @@ h1 span {
 }
 
 .contact-form {
-
   padding: 28px;
 
   border-radius: 20px;
@@ -1027,7 +998,6 @@ h1 span {
 }
 
 .contact-form label {
-
   color: #cfe0ec;
 
   font-size: 13px;
@@ -1037,7 +1007,6 @@ h1 span {
 
 .contact-form input,
 .contact-form textarea {
-
   width: 100%;
 
   border: 1px solid rgba(0, 200, 255, 0.25);
@@ -1059,13 +1028,11 @@ h1 span {
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-
   color: #718797;
 }
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-
   border-color: #00d9ff;
 
   box-shadow:
@@ -1073,7 +1040,6 @@ h1 span {
 }
 
 .contact-form .btn {
-
   margin-top: 10px;
 }
 
@@ -1083,7 +1049,6 @@ h1 span {
 ========================================= */
 
 @keyframes navAnimation {
-
   from {
     opacity: 0;
     transform: translateY(-20px);
@@ -1093,11 +1058,9 @@ h1 span {
     opacity: 1;
     transform: translateY(0);
   }
-
 }
 
 @keyframes heroAnimation {
-
   from {
     opacity: 0;
     transform: translateY(25px) scale(0.98);
@@ -1107,11 +1070,9 @@ h1 span {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
-
 }
 
 @keyframes pageAnimation {
-
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -1121,7 +1082,6 @@ h1 span {
     opacity: 1;
     transform: translateY(0);
   }
-
 }
 
 
@@ -1132,90 +1092,69 @@ h1 span {
 @media (max-width: 850px) {
 
   .navbar {
-
     width: calc(100% - 30px);
-
     padding: 0 15px;
   }
 
   .nav-links {
-
     gap: 16px;
   }
 
   .nav-link {
-
     font-size: 12px;
   }
 
   .logo {
-
     font-size: 15px;
-
     padding: 9px 13px;
-
     letter-spacing: 2px;
   }
 
   .hero {
-
     padding: 40px 30px;
-
     min-height: 380px;
   }
 
   .hero h1 {
-
     font-size: 45px;
   }
 
   .hero h2 {
-
     font-size: 17px;
   }
 
   .hero-description {
-
     font-size: 14px;
   }
 
   .inner-page {
-
     padding: 20px 15px 40px;
   }
 
   .page-card {
-
     padding: 30px;
   }
 
   .page-heading h1,
   .contact-left h1 {
-
     font-size: 40px;
   }
 
   .about-content {
-
     grid-template-columns: 1fr;
-
     gap: 25px;
   }
 
   .about-left h2 {
-
     font-size: 30px;
   }
 
   .skills-grid {
-
     grid-template-columns: repeat(3, 1fr);
   }
 
   .contact-card {
-
     grid-template-columns: 1fr;
-
     gap: 25px;
   }
 }
@@ -1228,161 +1167,121 @@ h1 span {
 @media (max-width: 600px) {
 
   body {
-
     overflow-x: hidden;
-
     overflow-y: auto;
   }
 
   .page {
-
     min-height: 100vh;
-
     height: auto;
   }
 
   .navbar {
-
     height: 60px;
-
+    min-height: 60px;
     width: calc(100% - 20px);
-
     padding: 0 10px;
+    border-radius: 16px;
   }
 
   .nav-links {
-
     gap: 10px;
   }
 
   .nav-link {
-
     font-size: 10px;
   }
 
   .nav-link.active::after {
-
     bottom: -6px;
   }
 
   .logo {
-
     font-size: 12px;
-
     padding: 8px 10px;
-
     letter-spacing: 2px;
   }
 
   .hero {
-
     padding: 30px 22px;
-
     min-height: 360px;
   }
 
   .hero h1 {
-
     font-size: 38px;
   }
 
   .hero h2 {
-
     font-size: 15px;
   }
 
   .hero-buttons {
-
     flex-direction: column;
-
     width: 100%;
   }
 
   .btn {
-
     width: 100%;
   }
 
   .inner-page {
-
     align-items: flex-start;
-
     padding: 20px 15px 40px;
   }
 
   .page-card {
-
     width: 100%;
-
     max-height: none;
-
     overflow: visible;
-
     padding: 25px 20px;
   }
 
   .page-heading {
-
     margin-bottom: 20px;
   }
 
   .page-heading h1,
   .contact-left h1 {
-
     font-size: 32px;
   }
 
   .skills-grid {
-
     grid-template-columns: repeat(2, 1fr);
-
     gap: 12px;
   }
 
   .skill-card {
-
     height: 105px;
   }
 
   .about-boxes {
-
     grid-template-columns: 1fr;
   }
 
   .project-card {
-
     padding: 20px;
-
     gap: 15px;
   }
 
   .project-icon {
-
     width: 70px;
-
     height: 70px;
-
     font-size: 22px;
   }
 
   .project-details h2 {
-
     font-size: 20px;
   }
 
   .project-details > p {
-
     font-size: 12px;
   }
 
   .project-arrow {
-
     display: none;
   }
 
   .contact-form {
-
     padding: 20px;
   }
-
-                         }
+    }
