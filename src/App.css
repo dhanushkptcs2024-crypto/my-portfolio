@@ -19,6 +19,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #010308;
   color: white;
+
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -62,7 +63,7 @@ textarea {
 
 
 /* ========================================
-   GLASS
+   NORMAL GLASS
 ======================================== */
 
 .glass {
@@ -101,123 +102,161 @@ textarea {
 
   position: relative;
 
-  z-index: 10;
+  flex-shrink: 0;
 
   animation: navAnimation 0.7s ease;
-}
 
-
-/* ========================================
-   NAVBAR CONTENT
-======================================== */
-
-.navbar-content {
-  width: 100%;
-
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  position: relative;
-
-  z-index: 2;
+  z-index: 10;
 }
 
 
 /* ========================================
    HOME NAVBAR
-   GLASS INSIDE
-   COLOR ONLY ON BORDER
+   BORDER ONLY GLOWING ANIMATION
 ======================================== */
 
 .home-navbar {
+  background: rgba(3, 13, 28, 0.32);
 
-  /* DARK GLASS ONLY */
-  background: rgba(3, 13, 28, 0.35);
+  border: 1px solid rgba(0, 200, 255, 0.20);
+
+  border-radius: 18px;
 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
-  /* COLORFUL BORDER */
-  border: 2px solid transparent;
+  box-shadow: none;
 
-  border-image:
-    linear-gradient(
-      90deg,
-      #00ffff,
-      #0088ff,
-      #7b00ff,
-      #ff00cc,
-      #ff0066,
-      #00ffff
-    ) 1;
-
-  /* IMPORTANT */
-  background-clip: padding-box;
-
-  box-shadow:
-    0 0 12px rgba(0, 255, 255, 0.20);
-
-  animation:
-    navbarBorderColor 4s linear infinite;
-
+  overflow: hidden;
 }
 
 
 /* ========================================
-   BORDER GLOW
+   MOVING COLORED BORDER
 ======================================== */
 
-.home-navbar {
-  filter:
-    drop-shadow(0 0 4px rgba(0, 255, 255, 0.45))
-    drop-shadow(0 0 8px rgba(120, 0, 255, 0.25));
+.home-navbar::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 18px;
+
+  padding: 2px;
+
+  background: conic-gradient(
+    from 0deg,
+
+    transparent 0deg,
+    transparent 315deg,
+
+    #00ffff 330deg,
+    #0088ff 342deg,
+    #7b00ff 350deg,
+    #ff00cc 356deg,
+
+    transparent 360deg
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  mask-composite: exclude;
+
+  animation: borderMove 7s linear infinite;
+
+  pointer-events: none;
+
+  z-index: 1;
 }
 
 
 /* ========================================
-   MOVING BORDER COLOR
+   SOFT GLOW
+   BORDER ONLY
 ======================================== */
 
-@keyframes navbarBorderColor {
+.home-navbar::after {
+  content: "";
 
-  0% {
-    border-image-source:
-      linear-gradient(
-        90deg,
-        #00ffff,
-        #0088ff,
-        #7b00ff,
-        #ff00cc,
-        #ff0066,
-        #00ffff
-      );
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 18px;
+
+  padding: 2px;
+
+  background: conic-gradient(
+    from 0deg,
+
+    transparent 0deg,
+    transparent 315deg,
+
+    rgba(0, 255, 255, 0.8) 330deg,
+    rgba(0, 140, 255, 0.8) 342deg,
+    rgba(123, 0, 255, 0.8) 350deg,
+    rgba(255, 0, 204, 0.8) 356deg,
+
+    transparent 360deg
+  );
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  mask-composite: exclude;
+
+  filter: blur(5px);
+
+  opacity: 0.75;
+
+  animation: borderMove 7s linear infinite;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+
+/* ========================================
+   NAVBAR CONTENT ABOVE BORDER
+======================================== */
+
+.home-navbar .logo,
+.home-navbar .nav-links {
+  position: relative;
+
+  z-index: 5;
+}
+
+
+/* ========================================
+   MOVING BORDER ANIMATION
+======================================== */
+
+@keyframes borderMove {
+  from {
+    transform: rotate(0deg);
   }
 
-  50% {
-    border-image-source:
-      linear-gradient(
-        90deg,
-        #ff0066,
-        #ff00cc,
-        #7b00ff,
-        #0088ff,
-        #00ffff,
-        #ff0066
-      );
-  }
-
-  100% {
-    border-image-source:
-      linear-gradient(
-        90deg,
-        #00ffff,
-        #0088ff,
-        #7b00ff,
-        #ff00cc,
-        #ff0066,
-        #00ffff
-      );
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -314,7 +353,7 @@ textarea {
 
 
 /* ========================================
-   HOME
+   HOME PAGE
 ======================================== */
 
 .home-page {
@@ -432,6 +471,7 @@ h1 span {
 
 .hero-buttons {
   display: flex;
+
   gap: 15px;
 }
 
@@ -439,6 +479,7 @@ h1 span {
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 10px;
@@ -653,6 +694,8 @@ h1 span {
 
   justify-content: center;
 
+  position: relative;
+
   gap: 10px;
 
   transition: 0.3s ease;
@@ -680,6 +723,8 @@ h1 span {
 
 .skill-card h3 {
   font-size: 14px;
+
+  color: white;
 }
 
 .skill-line {
@@ -729,6 +774,7 @@ h1 span {
 
 .project-icon {
   width: 110px;
+
   height: 110px;
 
   flex-shrink: 0;
@@ -738,6 +784,7 @@ h1 span {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   color: #00d9ff;
@@ -902,6 +949,7 @@ h1 span {
 
 .contact-symbol {
   width: 42px;
+
   height: 42px;
 
   border-radius: 10px;
@@ -909,6 +957,7 @@ h1 span {
   display: flex;
 
   align-items: center;
+
   justify-content: center;
 
   color: #00d9ff;
@@ -996,7 +1045,6 @@ h1 span {
 ======================================== */
 
 @keyframes navAnimation {
-
   from {
     opacity: 0;
     transform: translateY(-20px);
@@ -1009,7 +1057,6 @@ h1 span {
 }
 
 @keyframes heroAnimation {
-
   from {
     opacity: 0;
     transform: translateY(25px) scale(0.98);
@@ -1022,7 +1069,6 @@ h1 span {
 }
 
 @keyframes pageAnimation {
-
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -1043,6 +1089,7 @@ h1 span {
 
   .navbar {
     width: calc(100% - 30px);
+
     padding: 0 15px;
   }
 
@@ -1056,12 +1103,15 @@ h1 span {
 
   .logo {
     font-size: 15px;
+
     padding: 9px 13px;
+
     letter-spacing: 2px;
   }
 
   .hero {
     padding: 40px 30px;
+
     min-height: 380px;
   }
 
@@ -1092,6 +1142,7 @@ h1 span {
 
   .about-content {
     grid-template-columns: 1fr;
+
     gap: 25px;
   }
 
@@ -1105,6 +1156,7 @@ h1 span {
 
   .contact-card {
     grid-template-columns: 1fr;
+
     gap: 25px;
   }
 }
@@ -1118,11 +1170,13 @@ h1 span {
 
   body {
     overflow-x: hidden;
+
     overflow-y: auto;
   }
 
   .page {
     min-height: 100vh;
+
     height: auto;
   }
 
@@ -1155,7 +1209,12 @@ h1 span {
   }
 
   .home-navbar {
-    border-width: 2px;
+    border-radius: 18px;
+  }
+
+  .home-navbar::before,
+  .home-navbar::after {
+    border-radius: 18px;
   }
 
   .hero {
@@ -1229,6 +1288,7 @@ h1 span {
 
   .project-icon {
     width: 70px;
+
     height: 70px;
 
     font-size: 22px;
@@ -1249,4 +1309,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-                }
+   }
