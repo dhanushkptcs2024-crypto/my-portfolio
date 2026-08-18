@@ -19,7 +19,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #010308;
   color: white;
-
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -43,7 +42,6 @@ textarea {
 .page {
   width: 100%;
   min-height: 100vh;
-  height: auto;
 
   background:
     linear-gradient(
@@ -104,6 +102,7 @@ textarea {
   flex-shrink: 0;
 
   position: relative;
+
   z-index: 10;
 
   animation: navAnimation 0.7s ease;
@@ -122,49 +121,54 @@ textarea {
   justify-content: space-between;
 
   position: relative;
+
   z-index: 5;
 }
 
 
 /* ========================================
    HOME NAVBAR
-   BORDER ONLY GLOWS
+   TRANSPARENT GLASS
 ======================================== */
 
 .home-navbar {
+  position: relative;
+
   /*
-    Keep the inside DARK GLASS.
-    No colorful background here.
+    DARK TRANSPARENT GLASS
   */
 
   background: rgba(3, 13, 28, 0.25);
-
-  /*
-    Transparent border so the
-    animated border can appear.
-  */
-
-  border: 2px solid transparent;
-
-  /*
-    Keep glass effect.
-  */
 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
   /*
-    Keep normal dark glass shadow.
+    Transparent border
   */
 
-  box-shadow:
-    0 0 30px rgba(0, 120, 255, 0.08),
-    inset 0 0 25px rgba(0, 170, 255, 0.03);
+  border: 2px solid transparent;
+
+  /*
+    IMPORTANT:
+    Keeps the navbar content above
+    the glowing border.
+  */
+
+  z-index: 10;
+
+  /*
+    DO NOT use overflow:hidden
+    because the glow needs space outside.
+  */
+
+  overflow: visible;
 }
 
 
 /* ========================================
-   COLORFUL MOVING BORDER
+   ANIMATED BORDER
+   ONLY THE BORDER IS COLORED
 ======================================== */
 
 .home-navbar::before {
@@ -172,21 +176,16 @@ textarea {
 
   position: absolute;
 
-  /*
-    Border thickness
-  */
-
   inset: -2px;
 
   border-radius: 20px;
 
   /*
-    ONLY THIS LAYER HAS COLORS
+    COLORFUL GRADIENT
   */
 
   background: linear-gradient(
     90deg,
-
     #00ffff,
     #0088ff,
     #6600ff,
@@ -198,24 +197,39 @@ textarea {
   background-size: 300% 100%;
 
   /*
-    Moving animation
+    ANIMATION
   */
 
-  animation:
-    glowingBorder 4s linear infinite;
+  animation: navbarBorderAnimation 4s linear infinite;
 
   /*
-    Put glow behind navbar.
+    CUT OUT THE CENTER.
+    THIS IS WHAT MAKES IT
+    BORDER ONLY.
   */
 
-  z-index: -1;
+  padding: 2px;
+
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  -webkit-mask-composite: xor;
+
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+
+  mask-composite: exclude;
 
   pointer-events: none;
+
+  z-index: -1;
 }
 
 
 /* ========================================
-   SOFT OUTER GLOW
+   SOFT NEON GLOW
 ======================================== */
 
 .home-navbar::after {
@@ -223,13 +237,12 @@ textarea {
 
   position: absolute;
 
-  inset: -6px;
+  inset: -4px;
 
-  border-radius: 24px;
+  border-radius: 22px;
 
   background: linear-gradient(
     90deg,
-
     #00ffff,
     #0088ff,
     #6600ff,
@@ -240,28 +253,27 @@ textarea {
 
   background-size: 300% 100%;
 
-  animation:
-    glowingBorder 4s linear infinite;
+  animation: navbarBorderAnimation 4s linear infinite;
 
   /*
-    Blur makes it look like neon.
+    SOFT NEON EFFECT
   */
 
-  filter: blur(12px);
+  filter: blur(10px);
 
-  opacity: 0.6;
-
-  z-index: -2;
+  opacity: 0.55;
 
   pointer-events: none;
+
+  z-index: -2;
 }
 
 
 /* ========================================
-   GLOWING BORDER ANIMATION
+   BORDER ANIMATION
 ======================================== */
 
-@keyframes glowingBorder {
+@keyframes navbarBorderAnimation {
 
   0% {
     background-position: 0% 50%;
@@ -325,7 +337,7 @@ textarea {
 
 
 /* ========================================
-   NAVIGATION LINKS
+   NAVIGATION
 ======================================== */
 
 .nav-links {
@@ -1235,21 +1247,18 @@ h1 span {
     letter-spacing: 2px;
   }
 
-  /*
-    Mobile glow stays visible,
-    but the inside remains dark.
-  */
+  /* Home navbar border on mobile */
 
   .home-navbar::before {
     inset: -2px;
   }
 
   .home-navbar::after {
-    inset: -5px;
+    inset: -4px;
 
-    filter: blur(9px);
+    filter: blur(8px);
 
-    opacity: 0.55;
+    opacity: 0.5;
   }
 
   .hero {
@@ -1344,4 +1353,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-   }
+     }
