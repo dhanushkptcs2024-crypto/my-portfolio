@@ -1,15 +1,9 @@
 import React from "react";
-import { NavLink, Link, useLocation } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 function Navbar() {
-  const location = useLocation();
-
   return (
-    <nav
-      className={`navbar ${
-        location.pathname === "/" ? "home-navbar" : "glass"
-      }`}
-    >
+    <nav className="navbar home-navbar">
 
       <Link to="/" className="logo">
         DHANUSH
