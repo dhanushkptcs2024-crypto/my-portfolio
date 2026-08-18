@@ -62,7 +62,7 @@ textarea {
 
 
 /* ========================================
-   GLASS EFFECT
+   GLASS
 ======================================== */
 
 .glass {
@@ -99,8 +99,6 @@ textarea {
 
   padding: 0 25px;
 
-  flex-shrink: 0;
-
   position: relative;
 
   z-index: 10;
@@ -122,177 +120,104 @@ textarea {
 
   position: relative;
 
-  z-index: 5;
+  z-index: 2;
 }
 
 
 /* ========================================
    HOME NAVBAR
-   TRANSPARENT GLASS
+   GLASS INSIDE
+   COLOR ONLY ON BORDER
 ======================================== */
 
 .home-navbar {
-  position: relative;
 
-  /*
-    DARK TRANSPARENT GLASS
-  */
-
-  background: rgba(3, 13, 28, 0.25);
+  /* DARK GLASS ONLY */
+  background: rgba(3, 13, 28, 0.35);
 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
 
-  /*
-    Transparent border
-  */
-
+  /* COLORFUL BORDER */
   border: 2px solid transparent;
 
-  /*
-    IMPORTANT:
-    Keeps the navbar content above
-    the glowing border.
-  */
+  border-image:
+    linear-gradient(
+      90deg,
+      #00ffff,
+      #0088ff,
+      #7b00ff,
+      #ff00cc,
+      #ff0066,
+      #00ffff
+    ) 1;
 
-  z-index: 10;
+  /* IMPORTANT */
+  background-clip: padding-box;
 
-  /*
-    DO NOT use overflow:hidden
-    because the glow needs space outside.
-  */
+  box-shadow:
+    0 0 12px rgba(0, 255, 255, 0.20);
 
-  overflow: visible;
+  animation:
+    navbarBorderColor 4s linear infinite;
+
 }
 
 
 /* ========================================
-   ANIMATED BORDER
-   ONLY THE BORDER IS COLORED
+   BORDER GLOW
 ======================================== */
 
-.home-navbar::before {
-  content: "";
-
-  position: absolute;
-
-  inset: -2px;
-
-  border-radius: 20px;
-
-  /*
-    COLORFUL GRADIENT
-  */
-
-  background: linear-gradient(
-    90deg,
-    #00ffff,
-    #0088ff,
-    #6600ff,
-    #ff00cc,
-    #ff0066,
-    #00ffff
-  );
-
-  background-size: 300% 100%;
-
-  /*
-    ANIMATION
-  */
-
-  animation: navbarBorderAnimation 4s linear infinite;
-
-  /*
-    CUT OUT THE CENTER.
-    THIS IS WHAT MAKES IT
-    BORDER ONLY.
-  */
-
-  padding: 2px;
-
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-
-  -webkit-mask-composite: xor;
-
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-
-  mask-composite: exclude;
-
-  pointer-events: none;
-
-  z-index: -1;
+.home-navbar {
+  filter:
+    drop-shadow(0 0 4px rgba(0, 255, 255, 0.45))
+    drop-shadow(0 0 8px rgba(120, 0, 255, 0.25));
 }
 
 
 /* ========================================
-   SOFT NEON GLOW
+   MOVING BORDER COLOR
 ======================================== */
 
-.home-navbar::after {
-  content: "";
-
-  position: absolute;
-
-  inset: -4px;
-
-  border-radius: 22px;
-
-  background: linear-gradient(
-    90deg,
-    #00ffff,
-    #0088ff,
-    #6600ff,
-    #ff00cc,
-    #ff0066,
-    #00ffff
-  );
-
-  background-size: 300% 100%;
-
-  animation: navbarBorderAnimation 4s linear infinite;
-
-  /*
-    SOFT NEON EFFECT
-  */
-
-  filter: blur(10px);
-
-  opacity: 0.55;
-
-  pointer-events: none;
-
-  z-index: -2;
-}
-
-
-/* ========================================
-   BORDER ANIMATION
-======================================== */
-
-@keyframes navbarBorderAnimation {
+@keyframes navbarBorderColor {
 
   0% {
-    background-position: 0% 50%;
-  }
-
-  25% {
-    background-position: 75% 50%;
+    border-image-source:
+      linear-gradient(
+        90deg,
+        #00ffff,
+        #0088ff,
+        #7b00ff,
+        #ff00cc,
+        #ff0066,
+        #00ffff
+      );
   }
 
   50% {
-    background-position: 150% 50%;
-  }
-
-  75% {
-    background-position: 225% 50%;
+    border-image-source:
+      linear-gradient(
+        90deg,
+        #ff0066,
+        #ff00cc,
+        #7b00ff,
+        #0088ff,
+        #00ffff,
+        #ff0066
+      );
   }
 
   100% {
-    background-position: 300% 50%;
+    border-image-source:
+      linear-gradient(
+        90deg,
+        #00ffff,
+        #0088ff,
+        #7b00ff,
+        #ff00cc,
+        #ff0066,
+        #00ffff
+      );
   }
 }
 
@@ -389,7 +314,7 @@ textarea {
 
 
 /* ========================================
-   HOME PAGE
+   HOME
 ======================================== */
 
 .home-page {
@@ -507,7 +432,6 @@ h1 span {
 
 .hero-buttons {
   display: flex;
-
   gap: 15px;
 }
 
@@ -515,7 +439,6 @@ h1 span {
   display: inline-flex;
 
   align-items: center;
-
   justify-content: center;
 
   gap: 10px;
@@ -730,8 +653,6 @@ h1 span {
 
   justify-content: center;
 
-  position: relative;
-
   gap: 10px;
 
   transition: 0.3s ease;
@@ -759,8 +680,6 @@ h1 span {
 
 .skill-card h3 {
   font-size: 14px;
-
-  color: white;
 }
 
 .skill-line {
@@ -810,7 +729,6 @@ h1 span {
 
 .project-icon {
   width: 110px;
-
   height: 110px;
 
   flex-shrink: 0;
@@ -820,7 +738,6 @@ h1 span {
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   color: #00d9ff;
@@ -985,7 +902,6 @@ h1 span {
 
 .contact-symbol {
   width: 42px;
-
   height: 42px;
 
   border-radius: 10px;
@@ -993,7 +909,6 @@ h1 span {
   display: flex;
 
   align-items: center;
-
   justify-content: center;
 
   color: #00d9ff;
@@ -1128,7 +1043,6 @@ h1 span {
 
   .navbar {
     width: calc(100% - 30px);
-
     padding: 0 15px;
   }
 
@@ -1142,15 +1056,12 @@ h1 span {
 
   .logo {
     font-size: 15px;
-
     padding: 9px 13px;
-
     letter-spacing: 2px;
   }
 
   .hero {
     padding: 40px 30px;
-
     min-height: 380px;
   }
 
@@ -1181,7 +1092,6 @@ h1 span {
 
   .about-content {
     grid-template-columns: 1fr;
-
     gap: 25px;
   }
 
@@ -1195,7 +1105,6 @@ h1 span {
 
   .contact-card {
     grid-template-columns: 1fr;
-
     gap: 25px;
   }
 }
@@ -1209,13 +1118,11 @@ h1 span {
 
   body {
     overflow-x: hidden;
-
     overflow-y: auto;
   }
 
   .page {
     min-height: 100vh;
-
     height: auto;
   }
 
@@ -1247,18 +1154,8 @@ h1 span {
     letter-spacing: 2px;
   }
 
-  /* Home navbar border on mobile */
-
-  .home-navbar::before {
-    inset: -2px;
-  }
-
-  .home-navbar::after {
-    inset: -4px;
-
-    filter: blur(8px);
-
-    opacity: 0.5;
+  .home-navbar {
+    border-width: 2px;
   }
 
   .hero {
@@ -1332,7 +1229,6 @@ h1 span {
 
   .project-icon {
     width: 70px;
-
     height: 70px;
 
     font-size: 22px;
@@ -1353,4 +1249,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-     }
+                }
