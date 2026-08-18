@@ -15,6 +15,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #010308;
   color: white;
+
+  /* SCROLLING FIX */
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -30,14 +32,14 @@ textarea {
   font-family: inherit;
 }
 
-
-/* =========================================
+/* ================================
    MAIN PAGE
-========================================= */
+================================ */
 
 .page {
   width: 100%;
   min-height: 100vh;
+  height: auto;
 
   background:
     linear-gradient(
@@ -56,10 +58,9 @@ textarea {
   position: relative;
 }
 
-
-/* =========================================
-   GLASS
-========================================= */
+/* ================================
+   GLASS EFFECT
+================================ */
 
 .glass {
   background: rgba(3, 13, 28, 0.25);
@@ -74,22 +75,17 @@ textarea {
     inset 0 0 25px rgba(0, 170, 255, 0.03);
 }
 
-
-/* =========================================
+/* ================================
    NAVBAR
-   GLASS + TRAVELING BORDER
-========================================= */
+================================ */
 
 .navbar {
   width: calc(100% - 70px);
   max-width: 1250px;
 
-  height: 70px;
   min-height: 70px;
 
   margin: 16px auto 0;
-
-  padding: 0 25px;
 
   border-radius: 18px;
 
@@ -97,179 +93,14 @@ textarea {
   align-items: center;
   justify-content: space-between;
 
+  padding: 0 25px;
+
   flex-shrink: 0;
-
-  position: relative;
-
-  /*
-    IMPORTANT:
-    Transparent glass background.
-  */
-  background: rgba(3, 13, 28, 0.25);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  /*
-    Very faint normal border.
-  */
-  border: 1px solid rgba(0, 200, 255, 0.20);
-
-  /*
-    Keep the moving glow inside the navbar.
-  */
-  overflow: hidden;
-
-  /*
-    Creates separate stacking layer.
-  */
-  isolation: isolate;
 
   animation: navAnimation 0.7s ease;
 }
 
-
-/* =========================================
-   TRAVELING GLOW
-========================================= */
-
-.navbar::before {
-
-  content: "";
-
-  position: absolute;
-
-  /*
-    Make the animated layer slightly larger
-    than the navbar.
-  */
-  inset: -60%;
-
-  /*
-    This is the important part.
-    Only a small section is bright.
-  */
-  background:
-    conic-gradient(
-      from 0deg,
-
-      transparent 0deg,
-
-      transparent 320deg,
-
-      rgba(0, 255, 255, 0.15) 330deg,
-
-      #00ffff 338deg,
-
-      #008cff 344deg,
-
-      #a855f7 350deg,
-
-      rgba(168, 85, 247, 0.15) 356deg,
-
-      transparent 360deg
-    );
-
-  /*
-    Cut out the middle.
-
-    This means the color appears ONLY
-    around the border, not inside the navbar.
-  */
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-
-  -webkit-mask-composite: xor;
-
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-
-  mask-composite: exclude;
-
-  /*
-    Border thickness.
-  */
-  padding: 61%;
-
-  /*
-    Glow movement.
-  */
-  animation: navbarGlowTravel 5s linear infinite;
-
-  /*
-    Glow softness.
-  */
-  filter:
-    drop-shadow(0 0 3px #00ffff)
-    drop-shadow(0 0 8px rgba(0, 180, 255, 0.8))
-    drop-shadow(0 0 14px rgba(0, 120, 255, 0.45));
-
-  pointer-events: none;
-
-  z-index: 1;
-}
-
-
-/* =========================================
-   SECOND VERY SOFT GLOW
-========================================= */
-
-.navbar::after {
-
-  content: "";
-
-  position: absolute;
-
-  inset: 0;
-
-  border-radius: 18px;
-
-  border: 1px solid rgba(0, 210, 255, 0.08);
-
-  box-shadow:
-    inset 0 0 12px rgba(0, 170, 255, 0.04);
-
-  pointer-events: none;
-
-  z-index: 1;
-}
-
-
-/* =========================================
-   MAKE CONTENT STAY ABOVE BORDER
-========================================= */
-
-.navbar .logo,
-.navbar .nav-links {
-
-  position: relative;
-
-  z-index: 5;
-}
-
-
-/* =========================================
-   BORDER TRAVEL ANIMATION
-========================================= */
-
-@keyframes navbarGlowTravel {
-
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-
-}
-
-
-/* =========================================
-   LOGO
-========================================= */
+/* LOGO */
 
 .logo {
   padding: 11px 25px;
@@ -305,14 +136,13 @@ textarea {
   transform: translateY(-2px);
 }
 
-
-/* =========================================
-   NAVIGATION
-========================================= */
+/* NAVIGATION */
 
 .nav-links {
   display: flex;
+
   align-items: center;
+
   gap: 38px;
 }
 
@@ -355,10 +185,9 @@ textarea {
     0 0 10px #00d9ff;
 }
 
-
-/* =========================================
+/* ================================
    HOME PAGE
-========================================= */
+================================ */
 
 .home-page {
   flex: 1;
@@ -468,10 +297,9 @@ h1 span {
   margin-bottom: 30px;
 }
 
-
-/* =========================================
+/* ================================
    BUTTONS
-========================================= */
+================================ */
 
 .hero-buttons {
   display: flex;
@@ -540,10 +368,9 @@ h1 span {
   transform: translateY(-3px);
 }
 
-
-/* =========================================
+/* ================================
    INNER PAGES
-========================================= */
+================================ */
 
 .inner-page {
   flex: 1;
@@ -589,10 +416,9 @@ h1 span {
   line-height: 1.6;
 }
 
-
-/* =========================================
+/* ================================
    ABOUT
-========================================= */
+================================ */
 
 .about-content {
   display: grid;
@@ -672,10 +498,9 @@ h1 span {
   font-size: 13px;
 }
 
-
-/* =========================================
+/* ================================
    SKILLS
-========================================= */
+================================ */
 
 .skills-grid {
   display: grid;
@@ -742,10 +567,9 @@ h1 span {
     0 0 8px #00d9ff;
 }
 
-
-/* =========================================
+/* ================================
    PROJECTS
-========================================= */
+================================ */
 
 .projects-list {
   margin-top: 15px;
@@ -898,10 +722,9 @@ h1 span {
   transform: translateY(-3px);
 }
 
-
-/* =========================================
+/* ================================
    CONTACT
-========================================= */
+================================ */
 
 .contact-card {
   display: grid;
@@ -1043,10 +866,9 @@ h1 span {
   margin-top: 10px;
 }
 
-
-/* =========================================
+/* ================================
    ANIMATIONS
-========================================= */
+================================ */
 
 @keyframes navAnimation {
   from {
@@ -1084,15 +906,14 @@ h1 span {
   }
 }
 
-
-/* =========================================
+/* ================================
    TABLET
-========================================= */
+================================ */
 
 @media (max-width: 850px) {
-
   .navbar {
     width: calc(100% - 30px);
+
     padding: 0 15px;
   }
 
@@ -1106,12 +927,15 @@ h1 span {
 
   .logo {
     font-size: 15px;
+
     padding: 9px 13px;
+
     letter-spacing: 2px;
   }
 
   .hero {
     padding: 40px 30px;
+
     min-height: 380px;
   }
 
@@ -1142,6 +966,7 @@ h1 span {
 
   .about-content {
     grid-template-columns: 1fr;
+
     gap: 25px;
   }
 
@@ -1155,33 +980,30 @@ h1 span {
 
   .contact-card {
     grid-template-columns: 1fr;
+
     gap: 25px;
   }
 }
 
-
-/* =========================================
+/* ================================
    MOBILE
-========================================= */
+================================ */
 
 @media (max-width: 600px) {
-
   body {
     overflow-x: hidden;
+
     overflow-y: auto;
   }
 
   .page {
     min-height: 100vh;
+
     height: auto;
   }
 
   .navbar {
     height: 60px;
-    min-height: 60px;
-    width: calc(100% - 20px);
-    padding: 0 10px;
-    border-radius: 16px;
   }
 
   .nav-links {
@@ -1196,14 +1018,9 @@ h1 span {
     bottom: -6px;
   }
 
-  .logo {
-    font-size: 12px;
-    padding: 8px 10px;
-    letter-spacing: 2px;
-  }
-
   .hero {
     padding: 30px 22px;
+
     min-height: 360px;
   }
 
@@ -1217,6 +1034,7 @@ h1 span {
 
   .hero-buttons {
     flex-direction: column;
+
     width: 100%;
   }
 
@@ -1226,13 +1044,17 @@ h1 span {
 
   .inner-page {
     align-items: flex-start;
+
     padding: 20px 15px 40px;
   }
 
   .page-card {
     width: 100%;
+
     max-height: none;
+
     overflow: visible;
+
     padding: 25px 20px;
   }
 
@@ -1247,6 +1069,7 @@ h1 span {
 
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
+
     gap: 12px;
   }
 
@@ -1260,12 +1083,15 @@ h1 span {
 
   .project-card {
     padding: 20px;
+
     gap: 15px;
   }
 
   .project-icon {
     width: 70px;
+
     height: 70px;
+
     font-size: 22px;
   }
 
@@ -1284,4 +1110,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-    }
+}
