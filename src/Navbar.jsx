@@ -1,11 +1,9 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
-function Navbar() {
-
+function Navbar({ homeNavbar = false }) {
   return (
-
-    <nav className="navbar glass">
+    <nav className={`navbar glass ${homeNavbar ? "home-navbar" : ""}`}>
 
       <Link to="/" className="logo">
         DHANUSH
@@ -62,7 +60,6 @@ function Navbar() {
       </div>
 
     </nav>
-
   );
 }
 
