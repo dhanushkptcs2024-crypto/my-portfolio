@@ -8,19 +8,28 @@ html,
 body,
 #root {
   width: 100%;
-  height: 100%;
+  min-height: 100%;
 }
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   background: #010308;
   color: white;
-  overflow: hidden;
+
+  /* SCROLLING FIX */
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 
 a {
   text-decoration: none;
   color: inherit;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
 }
 
 /* ================================
@@ -29,12 +38,13 @@ a {
 
 .page {
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
 
   background:
     linear-gradient(
-      rgba(1, 5, 15, 0.25),
-      rgba(1, 5, 15, 0.55)
+      rgba(1, 5, 15, 0.38),
+      rgba(1, 5, 15, 0.72)
     ),
     url("/background.jpg");
 
@@ -48,24 +58,22 @@ a {
   position: relative;
 }
 
-
 /* ================================
    GLASS EFFECT
 ================================ */
 
 .glass {
-  background: rgba(3, 10, 25, 0.22);
+  background: rgba(3, 13, 28, 0.25);
 
-  border: 1px solid rgba(0, 170, 255, 0.35);
+  border: 1px solid rgba(0, 196, 255, 0.35);
 
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
   box-shadow:
-    0 0 25px rgba(0, 130, 255, 0.15),
-    inset 0 0 20px rgba(0, 170, 255, 0.03);
+    0 0 30px rgba(0, 120, 255, 0.08),
+    inset 0 0 25px rgba(0, 170, 255, 0.03);
 }
-
 
 /* ================================
    NAVBAR
@@ -75,16 +83,14 @@ a {
   width: calc(100% - 70px);
   max-width: 1250px;
 
-  height: 70px;
+  min-height: 70px;
 
   margin: 16px auto 0;
 
   border-radius: 18px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   padding: 0 25px;
@@ -94,10 +100,7 @@ a {
   animation: navAnimation 0.7s ease;
 }
 
-
-/* ================================
-   LOGO
-================================ */
+/* LOGO */
 
 .logo {
   padding: 11px 25px;
@@ -114,14 +117,10 @@ a {
 
   color: white;
 
-  background: rgba(5, 20, 45, 0.25);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0, 20, 40, 0.35);
 
   box-shadow:
-    0 0 18px rgba(0, 190, 255, 0.28),
-    inset 0 0 15px rgba(0, 150, 255, 0.05);
+    0 0 15px rgba(0, 190, 255, 0.22);
 
   transition: 0.3s ease;
 }
@@ -137,10 +136,7 @@ a {
   transform: translateY(-2px);
 }
 
-
-/* ================================
-   NAVIGATION
-================================ */
+/* NAVIGATION */
 
 .nav-links {
   display: flex;
@@ -189,7 +185,6 @@ a {
     0 0 10px #00d9ff;
 }
 
-
 /* ================================
    HOME PAGE
 ================================ */
@@ -223,22 +218,8 @@ a {
 
   align-items: center;
 
-  background: rgba(3, 12, 30, 0.25);
-
-  border: 1px solid rgba(0, 170, 255, 0.38);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  box-shadow:
-    0 0 35px rgba(0, 130, 255, 0.15),
-    inset 0 0 30px rgba(0, 170, 255, 0.03);
-
   animation: heroAnimation 0.9s ease;
 }
-
-
-/* GLOWING BORDER */
 
 .hero::after {
   content: "";
@@ -316,7 +297,6 @@ h1 span {
   margin-bottom: 30px;
 }
 
-
 /* ================================
    BUTTONS
 ================================ */
@@ -370,7 +350,7 @@ h1 span {
 }
 
 .secondary-btn {
-  background: rgba(0, 15, 30, 0.18);
+  background: rgba(0, 15, 30, 0.4);
 
   color: white;
 
@@ -388,7 +368,6 @@ h1 span {
   transform: translateY(-3px);
 }
 
-
 /* ================================
    INNER PAGES
 ================================ */
@@ -398,34 +377,23 @@ h1 span {
 
   display: flex;
 
-  align-items: center;
+  align-items: flex-start;
 
   justify-content: center;
 
-  padding: 25px 40px;
+  padding: 25px 40px 40px;
+
+  min-height: 0;
 }
 
 .page-card {
   width: min(100%, 1080px);
 
-  max-height: 88vh;
-
   border-radius: 25px;
 
   padding: 48px 55px;
 
-  overflow: hidden;
-
-  background: rgba(3, 12, 30, 0.25);
-
-  border: 1px solid rgba(0, 170, 255, 0.35);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
-  box-shadow:
-    0 0 35px rgba(0, 130, 255, 0.12),
-    inset 0 0 25px rgba(0, 170, 255, 0.03);
+  overflow: visible;
 
   animation: pageAnimation 0.7s ease;
 }
@@ -447,7 +415,6 @@ h1 span {
 
   line-height: 1.6;
 }
-
 
 /* ================================
    ABOUT
@@ -505,13 +472,6 @@ h1 span {
 
   padding: 20px;
 
-  background: rgba(2, 12, 30, 0.20);
-
-  border: 1px solid rgba(0, 170, 255, 0.3);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-
   transition: 0.3s ease;
 }
 
@@ -537,7 +497,6 @@ h1 span {
 
   font-size: 13px;
 }
-
 
 /* ================================
    SKILLS
@@ -567,13 +526,6 @@ h1 span {
   position: relative;
 
   gap: 10px;
-
-  background: rgba(2, 12, 30, 0.22);
-
-  border: 1px solid rgba(0, 170, 255, 0.3);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 
   transition: 0.3s ease;
 }
@@ -615,7 +567,6 @@ h1 span {
     0 0 8px #00d9ff;
 }
 
-
 /* ================================
    PROJECTS
 ================================ */
@@ -636,13 +587,6 @@ h1 span {
   align-items: center;
 
   gap: 30px;
-
-  background: rgba(2, 10, 25, 0.25);
-
-  border: 1px solid rgba(0, 170, 255, 0.35);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 
   transition: 0.3s ease;
 }
@@ -728,36 +672,55 @@ h1 span {
 
   font-size: 11px;
 
-  color: #00d9ff;
+  color: #bfefff;
 
-  border: 1px solid rgba(0, 205, 255, 0.35);
+  background: rgba(0, 180, 255, 0.08);
 
-  background: rgba(0, 150, 255, 0.08);
+  border: 1px solid rgba(0, 210, 255, 0.25);
 }
 
 .project-arrow {
-  font-size: 34px;
+  font-size: 30px;
 
   color: #00d9ff;
+
+  transition: 0.3s ease;
+}
+
+.project-card:hover .project-arrow {
+  transform: translate(5px, -5px);
 }
 
 .project-contact-btn {
-  display: inline-block;
+  display: block;
 
-  margin-top: 22px;
+  width: fit-content;
+
+  margin: 25px auto 0;
+
+  padding: 13px 22px;
+
+  border-radius: 10px;
 
   color: #00d9ff;
 
-  font-size: 13px;
+  border: 1px solid rgba(0, 210, 255, 0.4);
+
+  background: rgba(0, 20, 40, 0.35);
 
   transition: 0.3s ease;
 }
 
 .project-contact-btn:hover {
-  text-shadow:
-    0 0 12px #00d9ff;
-}
+  background: rgba(0, 200, 255, 0.1);
 
+  border-color: #00d9ff;
+
+  box-shadow:
+    0 0 20px rgba(0, 210, 255, 0.2);
+
+  transform: translateY(-3px);
+}
 
 /* ================================
    CONTACT
@@ -768,13 +731,15 @@ h1 span {
 
   grid-template-columns: 1fr 1fr;
 
-  gap: 60px;
+  gap: 45px;
 
   align-items: center;
 }
 
 .contact-left h1 {
-  font-size: 55px;
+  font-size: 52px;
+
+  text-transform: uppercase;
 
   margin-bottom: 18px;
 }
@@ -784,7 +749,7 @@ h1 span {
 
   line-height: 1.7;
 
-  max-width: 400px;
+  max-width: 450px;
 
   margin-bottom: 25px;
 }
@@ -804,24 +769,15 @@ h1 span {
 
   gap: 15px;
 
-  padding: 14px;
+  padding: 15px;
 
-  border-radius: 13px;
-
-  width: 85%;
-
-  background: rgba(2, 10, 25, 0.20);
-
-  border: 1px solid rgba(0, 170, 255, 0.3);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  border-radius: 14px;
 }
 
 .contact-symbol {
-  width: 38px;
+  width: 42px;
 
-  height: 38px;
+  height: 42px;
 
   border-radius: 10px;
 
@@ -833,21 +789,23 @@ h1 span {
 
   color: #00d9ff;
 
-  border: 1px solid rgba(0, 210, 255, 0.4);
+  font-weight: 700;
+
+  border: 1px solid rgba(0, 210, 255, 0.35);
 }
 
 .contact-item small {
-  color: #758b9b;
+  color: #00d9ff;
 
-  display: block;
-
-  margin-bottom: 4px;
+  font-size: 11px;
 }
 
 .contact-item p {
-  color: #e1edf5;
+  color: #d7e6f0;
 
   font-size: 13px;
+
+  margin-top: 4px;
 }
 
 .contact-form {
@@ -860,49 +818,40 @@ h1 span {
   flex-direction: column;
 
   gap: 10px;
-
-  background: rgba(2, 10, 25, 0.22);
-
-  border: 1px solid rgba(0, 170, 255, 0.3);
-
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 
 .contact-form label {
-  color: #bcd0df;
+  color: #cfe0ec;
 
-  font-size: 12px;
+  font-size: 13px;
 
-  margin-top: 5px;
+  margin-top: 4px;
 }
 
 .contact-form input,
 .contact-form textarea {
   width: 100%;
 
-  padding: 13px 15px;
+  border: 1px solid rgba(0, 200, 255, 0.25);
 
   border-radius: 10px;
 
-  border: 1px solid rgba(0, 200, 255, 0.3);
-
-  background: rgba(0, 10, 25, 0.35);
-
-  color: white;
+  padding: 12px 14px;
 
   outline: none;
 
-  font-family: inherit;
+  color: white;
 
-  resize: none;
+  background: rgba(0, 10, 25, 0.55);
 
   transition: 0.3s ease;
+
+  resize: none;
 }
 
 .contact-form input::placeholder,
 .contact-form textarea::placeholder {
-  color: #63798a;
+  color: #718797;
 }
 
 .contact-form input:focus,
@@ -910,15 +859,12 @@ h1 span {
   border-color: #00d9ff;
 
   box-shadow:
-    0 0 15px rgba(0, 210, 255, 0.18);
+    0 0 15px rgba(0, 210, 255, 0.15);
 }
 
-.contact-form button {
+.contact-form .btn {
   margin-top: 10px;
-
-  border: none;
 }
-
 
 /* ================================
    ANIMATIONS
@@ -960,106 +906,183 @@ h1 span {
   }
 }
 
-
 /* ================================
-   MOBILE
+   TABLET
 ================================ */
 
-@media (max-width: 800px) {
-
+@media (max-width: 850px) {
   .navbar {
-    width: calc(100% - 20px);
+    width: calc(100% - 30px);
 
-    height: 62px;
+    padding: 0 15px;
+  }
 
-    margin-top: 10px;
+  .nav-links {
+    gap: 16px;
+  }
 
-    padding: 0 10px;
+  .nav-link {
+    font-size: 12px;
   }
 
   .logo {
-    padding: 9px 12px;
+    font-size: 15px;
 
-    font-size: 13px;
+    padding: 9px 13px;
 
     letter-spacing: 2px;
   }
 
-  .nav-links {
-    gap: 12px;
-  }
-
-  .nav-link {
-    font-size: 11px;
-  }
-
-  .home-page {
-    padding: 15px;
-  }
-
   .hero {
-    padding: 35px 25px;
+    padding: 40px 30px;
 
-    min-height: 430px;
+    min-height: 380px;
   }
 
   .hero h1 {
-    font-size: 43px;
+    font-size: 45px;
   }
 
   .hero h2 {
-    font-size: 16px;
-
-    line-height: 1.5;
+    font-size: 17px;
   }
 
   .hero-description {
     font-size: 14px;
-
-    line-height: 1.7;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-
-    align-items: flex-start;
   }
 
   .inner-page {
-    padding: 15px;
+    padding: 20px 15px 40px;
   }
 
   .page-card {
-    padding: 30px 22px;
-
-    max-height: 90vh;
+    padding: 30px;
   }
 
   .page-heading h1,
   .contact-left h1 {
-    font-size: 38px;
+    font-size: 40px;
   }
 
   .about-content {
     grid-template-columns: 1fr;
 
-    gap: 20px;
+    gap: 25px;
   }
 
   .about-left h2 {
-    font-size: 28px;
+    font-size: 30px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .contact-card {
+    grid-template-columns: 1fr;
+
+    gap: 25px;
+  }
+}
+
+/* ================================
+   MOBILE
+================================ */
+
+@media (max-width: 600px) {
+  body {
+    overflow-x: hidden;
+
+    overflow-y: auto;
+  }
+
+  .page {
+    min-height: 100vh;
+
+    height: auto;
+  }
+
+  .navbar {
+    height: 60px;
+  }
+
+  .nav-links {
+    gap: 10px;
+  }
+
+  .nav-link {
+    font-size: 10px;
+  }
+
+  .nav-link.active::after {
+    bottom: -6px;
+  }
+
+  .hero {
+    padding: 30px 22px;
+
+    min-height: 360px;
+  }
+
+  .hero h1 {
+    font-size: 38px;
+  }
+
+  .hero h2 {
+    font-size: 15px;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+
+    width: 100%;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .inner-page {
+    align-items: flex-start;
+
+    padding: 20px 15px 40px;
+  }
+
+  .page-card {
+    width: 100%;
+
+    max-height: none;
+
+    overflow: visible;
+
+    padding: 25px 20px;
+  }
+
+  .page-heading {
+    margin-bottom: 20px;
+  }
+
+  .page-heading h1,
+  .contact-left h1 {
+    font-size: 32px;
+  }
+
+  .skills-grid {
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+  }
+
+  .skill-card {
+    height: 105px;
   }
 
   .about-boxes {
     grid-template-columns: 1fr;
   }
 
-  .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .project-card {
-    padding: 22px;
+    padding: 20px;
 
     gap: 15px;
   }
@@ -1073,20 +1096,18 @@ h1 span {
   }
 
   .project-details h2 {
-    font-size: 21px;
+    font-size: 20px;
+  }
+
+  .project-details > p {
+    font-size: 12px;
   }
 
   .project-arrow {
     display: none;
   }
 
-  .contact-card {
-    grid-template-columns: 1fr;
-
-    gap: 25px;
+  .contact-form {
+    padding: 20px;
   }
-
-  .contact-item {
-    width: 100%;
   }
-}
