@@ -4,14 +4,11 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 function Navbar() {
   const location = useLocation();
 
-  // Glowing animation only on Home page
+  // Glow is enabled only on Home page
   const isHome = location.pathname === "/";
 
   return (
     <nav className={`navbar glass ${isHome ? "home-navbar" : ""}`}>
-
-      {/* Animated glowing border only on Home */}
-      {isHome && <div className="navbar-glow"></div>}
 
       <div className="navbar-content">
 
