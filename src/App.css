@@ -1,3 +1,7 @@
+/* ========================================
+   RESET
+======================================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -13,7 +17,9 @@ body,
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+
   background: #010308;
+
   color: white;
 
   overflow-x: hidden;
@@ -32,13 +38,15 @@ textarea {
 }
 
 
-/* ==================================================
+/* ========================================
    MAIN PAGE
-================================================== */
+======================================== */
 
 .page {
   width: 100%;
+
   min-height: 100vh;
+
   height: auto;
 
   background:
@@ -49,19 +57,22 @@ textarea {
     url("/background.jpg");
 
   background-size: cover;
+
   background-position: center;
+
   background-repeat: no-repeat;
 
   display: flex;
+
   flex-direction: column;
 
   position: relative;
 }
 
 
-/* ==================================================
+/* ========================================
    GLASS EFFECT
-================================================== */
+======================================== */
 
 .glass {
   background: rgba(3, 13, 28, 0.25);
@@ -69,6 +80,7 @@ textarea {
   border: 1px solid rgba(0, 196, 255, 0.35);
 
   backdrop-filter: blur(20px);
+
   -webkit-backdrop-filter: blur(20px);
 
   box-shadow:
@@ -77,12 +89,13 @@ textarea {
 }
 
 
-/* ==================================================
+/* ========================================
    NAVBAR
-================================================== */
+======================================== */
 
 .navbar {
   width: calc(100% - 70px);
+
   max-width: 1250px;
 
   min-height: 70px;
@@ -92,41 +105,64 @@ textarea {
   border-radius: 18px;
 
   display: flex;
+
   align-items: center;
+
   justify-content: space-between;
 
   padding: 0 25px;
 
   flex-shrink: 0;
 
-  animation: navAnimation 0.7s ease;
-}
-
-
-/* ==================================================
-   HOME NAVBAR GLOWING BORDER
-================================================== */
-
-.home-navbar {
   position: relative;
 
   z-index: 10;
 
-  border: 2px solid transparent;
+  animation: navAnimation 0.7s ease;
+}
 
-  border-radius: 18px;
+
+/* ========================================
+   NAVBAR CONTENT
+======================================== */
+
+.navbar-content {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  position: relative;
+
+  z-index: 5;
+}
+
+
+/* ========================================
+   HOME NAVBAR GLOW
+======================================== */
+
+/*
+   This animation is ONLY used on Home page.
+*/
+
+.home-navbar {
+  border: 2px solid transparent;
 
   background:
     linear-gradient(
-      rgba(3, 13, 28, 0.78),
-      rgba(3, 13, 28, 0.78)
+      rgba(3, 13, 28, 0.65),
+      rgba(3, 13, 28, 0.65)
     ) padding-box,
 
     linear-gradient(
       90deg,
       #00ffff,
       #0088ff,
-      #7b00ff,
+      #6600ff,
       #ff00cc,
       #ff0066,
       #00ffff
@@ -134,144 +170,125 @@ textarea {
 
   background-size:
     100% 100%,
-    400% 100%;
+    300% 100%;
 
   animation:
-    homeNavbarBorder 3s linear infinite;
+    navAnimation 0.7s ease,
+    glowingBorder 4s linear infinite;
 
   box-shadow:
-    0 0 8px #00ffff,
-    0 0 18px #0088ff,
-    0 0 30px #7b00ff,
-    0 0 45px rgba(255, 0, 204, 0.45);
-
-  overflow: visible;
+    0 0 8px rgba(0, 255, 255, 0.7),
+    0 0 18px rgba(0, 140, 255, 0.5),
+    0 0 30px rgba(180, 0, 255, 0.4);
 }
 
 
-/* ==================================================
+/* ========================================
    OUTER GLOW
-================================================== */
+======================================== */
 
 .home-navbar::before {
   content: "";
 
   position: absolute;
 
-  z-index: -1;
+  inset: -5px;
 
-  top: -7px;
-  left: -7px;
-  right: -7px;
-  bottom: -7px;
-
-  border-radius: 25px;
+  border-radius: 23px;
 
   background:
     linear-gradient(
       90deg,
       #00ffff,
       #0088ff,
-      #7b00ff,
+      #6600ff,
       #ff00cc,
       #ff0066,
       #00ffff
     );
 
-  background-size: 400% 100%;
+  background-size: 300% 100%;
 
-  animation:
-    homeNavbarGlow 3s linear infinite;
+  animation: glowingBorder 4s linear infinite;
 
-  filter: blur(12px);
+  filter: blur(14px);
 
-  opacity: 0.85;
+  opacity: 0.7;
+
+  z-index: -1;
 
   pointer-events: none;
 }
 
 
-/* ==================================================
-   SECOND GLOW
-================================================== */
+/* ========================================
+   SECOND GLOW LAYER
+======================================== */
 
 .home-navbar::after {
   content: "";
 
   position: absolute;
 
-  z-index: -2;
+  inset: -2px;
 
-  top: -12px;
-  left: -12px;
-  right: -12px;
-  bottom: -12px;
-
-  border-radius: 30px;
+  border-radius: 20px;
 
   background:
     linear-gradient(
       90deg,
-      #00ffff,
-      #0066ff,
-      #9900ff,
-      #ff00cc,
-      #ff0066,
-      #00ffff
+      transparent,
+      rgba(0, 255, 255, 0.35),
+      rgba(150, 0, 255, 0.35),
+      rgba(255, 0, 200, 0.35),
+      transparent
     );
 
-  background-size: 400% 100%;
+  background-size: 300% 100%;
 
-  animation:
-    homeNavbarGlow 3s linear infinite;
+  animation: glowingBorder 2.5s linear infinite;
 
-  filter: blur(22px);
+  filter: blur(5px);
 
-  opacity: 0.35;
+  opacity: 0.8;
+
+  z-index: -1;
 
   pointer-events: none;
 }
 
 
-/* ==================================================
+/* ========================================
    GLOWING BORDER ANIMATION
-================================================== */
+======================================== */
 
-@keyframes homeNavbarBorder {
-
-  0% {
-    background-position:
-      0 0,
-      0% 50%;
-  }
-
-  100% {
-    background-position:
-      0 0,
-      400% 50%;
-  }
-}
-
-
-/* ==================================================
-   GLOW ANIMATION
-================================================== */
-
-@keyframes homeNavbarGlow {
+@keyframes glowingBorder {
 
   0% {
     background-position: 0% 50%;
   }
 
+  25% {
+    background-position: 75% 50%;
+  }
+
+  50% {
+    background-position: 150% 50%;
+  }
+
+  75% {
+    background-position: 225% 50%;
+  }
+
   100% {
-    background-position: 400% 50%;
+    background-position: 300% 50%;
   }
 }
 
 
-/* ==================================================
+/* ========================================
    LOGO
-================================================== */
+======================================== */
 
 .logo {
   padding: 11px 25px;
@@ -308,9 +325,9 @@ textarea {
 }
 
 
-/* ==================================================
+/* ========================================
    NAVIGATION
-================================================== */
+======================================== */
 
 .nav-links {
   display: flex;
@@ -347,6 +364,7 @@ textarea {
   position: absolute;
 
   left: 0;
+
   right: 0;
 
   bottom: -9px;
@@ -360,9 +378,9 @@ textarea {
 }
 
 
-/* ==================================================
+/* ========================================
    HOME PAGE
-================================================== */
+======================================== */
 
 .home-page {
   flex: 1;
@@ -473,9 +491,9 @@ h1 span {
 }
 
 
-/* ==================================================
+/* ========================================
    BUTTONS
-================================================== */
+======================================== */
 
 .hero-buttons {
   display: flex;
@@ -545,9 +563,9 @@ h1 span {
 }
 
 
-/* ==================================================
+/* ========================================
    INNER PAGES
-================================================== */
+======================================== */
 
 .inner-page {
   flex: 1;
@@ -594,9 +612,9 @@ h1 span {
 }
 
 
-/* ==================================================
+/* ========================================
    ABOUT
-================================================== */
+======================================== */
 
 .about-content {
   display: grid;
@@ -677,9 +695,9 @@ h1 span {
 }
 
 
-/* ==================================================
+/* ========================================
    SKILLS
-================================================== */
+======================================== */
 
 .skills-grid {
   display: grid;
@@ -747,9 +765,9 @@ h1 span {
 }
 
 
-/* ==================================================
+/* ========================================
    PROJECTS
-================================================== */
+======================================== */
 
 .projects-list {
   margin-top: 15px;
@@ -903,9 +921,9 @@ h1 span {
 }
 
 
-/* ==================================================
+/* ========================================
    CONTACT
-================================================== */
+======================================== */
 
 .contact-card {
   display: grid;
@@ -1048,56 +1066,63 @@ h1 span {
 }
 
 
-/* ==================================================
+/* ========================================
    ANIMATIONS
-================================================== */
+======================================== */
 
 @keyframes navAnimation {
 
   from {
     opacity: 0;
+
     transform: translateY(-20px);
   }
 
   to {
     opacity: 1;
+
     transform: translateY(0);
   }
-
 }
 
 @keyframes heroAnimation {
 
   from {
     opacity: 0;
-    transform: translateY(25px) scale(0.98);
+
+    transform:
+      translateY(25px)
+      scale(0.98);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
-  }
 
+    transform:
+      translateY(0)
+      scale(1);
+  }
 }
 
 @keyframes pageAnimation {
 
   from {
     opacity: 0;
+
     transform: translateY(20px);
   }
 
   to {
     opacity: 1;
+
     transform: translateY(0);
   }
-
 }
 
 
-/* ==================================================
+/* ========================================
    TABLET
-================================================== */
+======================================== */
 
 @media (max-width: 850px) {
 
@@ -1105,6 +1130,10 @@ h1 span {
     width: calc(100% - 30px);
 
     padding: 0 15px;
+  }
+
+  .navbar-content {
+    width: 100%;
   }
 
   .nav-links {
@@ -1173,13 +1202,12 @@ h1 span {
 
     gap: 25px;
   }
-
 }
 
 
-/* ==================================================
+/* ========================================
    MOBILE
-================================================== */
+======================================== */
 
 @media (max-width: 600px) {
 
@@ -1196,7 +1224,17 @@ h1 span {
   }
 
   .navbar {
-    height: 60px;
+    width: calc(100% - 20px);
+
+    min-height: 60px;
+
+    margin-top: 10px;
+
+    padding: 0 10px;
+  }
+
+  .navbar-content {
+    min-height: 60px;
   }
 
   .nav-links {
@@ -1211,40 +1249,29 @@ h1 span {
     bottom: -6px;
   }
 
+  .logo {
+    font-size: 12px;
 
-  /* Mobile glowing navbar */
+    padding: 8px 10px;
 
-  .home-navbar {
-    border-width: 2px;
-
-    box-shadow:
-      0 0 8px #00ffff,
-      0 0 18px #0088ff,
-      0 0 28px #7b00ff;
+    letter-spacing: 2px;
   }
 
+  /* Keep mobile glow visible */
+
   .home-navbar::before {
-    top: -5px;
-    left: -5px;
-    right: -5px;
-    bottom: -5px;
+    inset: -4px;
 
-    filter: blur(9px);
+    filter: blur(10px);
 
-    opacity: 0.8;
+    opacity: 0.65;
   }
 
   .home-navbar::after {
-    top: -8px;
-    left: -8px;
-    right: -8px;
-    bottom: -8px;
+    inset: -2px;
 
-    filter: blur(15px);
-
-    opacity: 0.3;
+    filter: blur(4px);
   }
-
 
   .hero {
     padding: 30px 22px;
@@ -1338,5 +1365,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-
-  }
+    }
