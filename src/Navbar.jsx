@@ -1,61 +1,75 @@
 import React from "react";
-import { NavLink, Link } from "react-router-dom";
+import { NavLink, Link, useLocation } from "react-router-dom";
 
-function Navbar({ homeNavbar = false }) {
+function Navbar() {
+  const location = useLocation();
+
+  // Glowing animation only on Home page
+  const isHome = location.pathname === "/";
+
   return (
-    <nav className={`navbar glass ${homeNavbar ? "home-navbar" : ""}`}>
+    <nav className={`navbar glass ${isHome ? "home-navbar" : ""}`}>
 
-      <Link to="/" className="logo">
-        DHANUSH
-      </Link>
+      {/* Animated glowing border only on Home */}
+      {isHome && <div className="navbar-glow"></div>}
 
-      <div className="nav-links">
+      <div className="navbar-content">
 
-        <NavLink
-          to="/"
-          end
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          Home
-        </NavLink>
+        {/* LOGO */}
+        <Link to="/" className="logo">
+          DHANUSH
+        </Link>
 
-        <NavLink
-          to="/about"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          About
-        </NavLink>
+        {/* NAVIGATION */}
+        <div className="nav-links">
 
-        <NavLink
-          to="/skills"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          Skills
-        </NavLink>
+          <NavLink
+            to="/"
+            end
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Home
+          </NavLink>
 
-        <NavLink
-          to="/projects"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          Projects
-        </NavLink>
+          <NavLink
+            to="/about"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            About
+          </NavLink>
 
-        <NavLink
-          to="/contact"
-          className={({ isActive }) =>
-            isActive ? "nav-link active" : "nav-link"
-          }
-        >
-          Contact
-        </NavLink>
+          <NavLink
+            to="/skills"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Skills
+          </NavLink>
+
+          <NavLink
+            to="/projects"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Projects
+          </NavLink>
+
+          <NavLink
+            to="/contact"
+            className={({ isActive }) =>
+              isActive ? "nav-link active" : "nav-link"
+            }
+          >
+            Contact
+          </NavLink>
+
+        </div>
 
       </div>
 
