@@ -17,9 +17,7 @@ body,
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-
   background: #010308;
-
   color: white;
 
   overflow-x: hidden;
@@ -44,9 +42,7 @@ textarea {
 
 .page {
   width: 100%;
-
   min-height: 100vh;
-
   height: auto;
 
   background:
@@ -57,13 +53,10 @@ textarea {
     url("/background.jpg");
 
   background-size: cover;
-
   background-position: center;
-
   background-repeat: no-repeat;
 
   display: flex;
-
   flex-direction: column;
 
   position: relative;
@@ -80,7 +73,6 @@ textarea {
   border: 1px solid rgba(0, 196, 255, 0.35);
 
   backdrop-filter: blur(20px);
-
   -webkit-backdrop-filter: blur(20px);
 
   box-shadow:
@@ -95,7 +87,6 @@ textarea {
 
 .navbar {
   width: calc(100% - 70px);
-
   max-width: 1250px;
 
   min-height: 70px;
@@ -105,9 +96,7 @@ textarea {
   border-radius: 18px;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   padding: 0 25px;
@@ -115,7 +104,6 @@ textarea {
   flex-shrink: 0;
 
   position: relative;
-
   z-index: 10;
 
   animation: navAnimation 0.7s ease;
@@ -130,61 +118,53 @@ textarea {
   width: 100%;
 
   display: flex;
-
   align-items: center;
-
   justify-content: space-between;
 
   position: relative;
-
   z-index: 5;
 }
 
 
 /* ========================================
-   HOME NAVBAR GLOW
+   HOME NAVBAR
+   BORDER ONLY GLOWS
 ======================================== */
 
-/*
-   This animation is ONLY used on Home page.
-*/
-
 .home-navbar {
+  /*
+    Keep the inside DARK GLASS.
+    No colorful background here.
+  */
+
+  background: rgba(3, 13, 28, 0.25);
+
+  /*
+    Transparent border so the
+    animated border can appear.
+  */
+
   border: 2px solid transparent;
 
-  background:
-    linear-gradient(
-      rgba(3, 13, 28, 0.65),
-      rgba(3, 13, 28, 0.65)
-    ) padding-box,
+  /*
+    Keep glass effect.
+  */
 
-    linear-gradient(
-      90deg,
-      #00ffff,
-      #0088ff,
-      #6600ff,
-      #ff00cc,
-      #ff0066,
-      #00ffff
-    ) border-box;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
 
-  background-size:
-    100% 100%,
-    300% 100%;
-
-  animation:
-    navAnimation 0.7s ease,
-    glowingBorder 4s linear infinite;
+  /*
+    Keep normal dark glass shadow.
+  */
 
   box-shadow:
-    0 0 8px rgba(0, 255, 255, 0.7),
-    0 0 18px rgba(0, 140, 255, 0.5),
-    0 0 30px rgba(180, 0, 255, 0.4);
+    0 0 30px rgba(0, 120, 255, 0.08),
+    inset 0 0 25px rgba(0, 170, 255, 0.03);
 }
 
 
 /* ========================================
-   OUTER GLOW
+   COLORFUL MOVING BORDER
 ======================================== */
 
 .home-navbar::before {
@@ -192,28 +172,41 @@ textarea {
 
   position: absolute;
 
-  inset: -5px;
+  /*
+    Border thickness
+  */
 
-  border-radius: 23px;
+  inset: -2px;
 
-  background:
-    linear-gradient(
-      90deg,
-      #00ffff,
-      #0088ff,
-      #6600ff,
-      #ff00cc,
-      #ff0066,
-      #00ffff
-    );
+  border-radius: 20px;
+
+  /*
+    ONLY THIS LAYER HAS COLORS
+  */
+
+  background: linear-gradient(
+    90deg,
+
+    #00ffff,
+    #0088ff,
+    #6600ff,
+    #ff00cc,
+    #ff0066,
+    #00ffff
+  );
 
   background-size: 300% 100%;
 
-  animation: glowingBorder 4s linear infinite;
+  /*
+    Moving animation
+  */
 
-  filter: blur(14px);
+  animation:
+    glowingBorder 4s linear infinite;
 
-  opacity: 0.7;
+  /*
+    Put glow behind navbar.
+  */
 
   z-index: -1;
 
@@ -222,7 +215,7 @@ textarea {
 
 
 /* ========================================
-   SECOND GLOW LAYER
+   SOFT OUTER GLOW
 ======================================== */
 
 .home-navbar::after {
@@ -230,29 +223,35 @@ textarea {
 
   position: absolute;
 
-  inset: -2px;
+  inset: -6px;
 
-  border-radius: 20px;
+  border-radius: 24px;
 
-  background:
-    linear-gradient(
-      90deg,
-      transparent,
-      rgba(0, 255, 255, 0.35),
-      rgba(150, 0, 255, 0.35),
-      rgba(255, 0, 200, 0.35),
-      transparent
-    );
+  background: linear-gradient(
+    90deg,
+
+    #00ffff,
+    #0088ff,
+    #6600ff,
+    #ff00cc,
+    #ff0066,
+    #00ffff
+  );
 
   background-size: 300% 100%;
 
-  animation: glowingBorder 2.5s linear infinite;
+  animation:
+    glowingBorder 4s linear infinite;
 
-  filter: blur(5px);
+  /*
+    Blur makes it look like neon.
+  */
 
-  opacity: 0.8;
+  filter: blur(12px);
 
-  z-index: -1;
+  opacity: 0.6;
+
+  z-index: -2;
 
   pointer-events: none;
 }
@@ -326,7 +325,7 @@ textarea {
 
 
 /* ========================================
-   NAVIGATION
+   NAVIGATION LINKS
 ======================================== */
 
 .nav-links {
@@ -364,7 +363,6 @@ textarea {
   position: absolute;
 
   left: 0;
-
   right: 0;
 
   bottom: -9px;
@@ -1074,13 +1072,11 @@ h1 span {
 
   from {
     opacity: 0;
-
     transform: translateY(-20px);
   }
 
   to {
     opacity: 1;
-
     transform: translateY(0);
   }
 }
@@ -1089,18 +1085,12 @@ h1 span {
 
   from {
     opacity: 0;
-
-    transform:
-      translateY(25px)
-      scale(0.98);
+    transform: translateY(25px) scale(0.98);
   }
 
   to {
     opacity: 1;
-
-    transform:
-      translateY(0)
-      scale(1);
+    transform: translateY(0) scale(1);
   }
 }
 
@@ -1108,13 +1098,11 @@ h1 span {
 
   from {
     opacity: 0;
-
     transform: translateY(20px);
   }
 
   to {
     opacity: 1;
-
     transform: translateY(0);
   }
 }
@@ -1130,10 +1118,6 @@ h1 span {
     width: calc(100% - 30px);
 
     padding: 0 15px;
-  }
-
-  .navbar-content {
-    width: 100%;
   }
 
   .nav-links {
@@ -1224,17 +1208,11 @@ h1 span {
   }
 
   .navbar {
+    height: 60px;
+
     width: calc(100% - 20px);
 
-    min-height: 60px;
-
-    margin-top: 10px;
-
     padding: 0 10px;
-  }
-
-  .navbar-content {
-    min-height: 60px;
   }
 
   .nav-links {
@@ -1257,20 +1235,21 @@ h1 span {
     letter-spacing: 2px;
   }
 
-  /* Keep mobile glow visible */
+  /*
+    Mobile glow stays visible,
+    but the inside remains dark.
+  */
 
   .home-navbar::before {
-    inset: -4px;
-
-    filter: blur(10px);
-
-    opacity: 0.65;
+    inset: -2px;
   }
 
   .home-navbar::after {
-    inset: -2px;
+    inset: -5px;
 
-    filter: blur(4px);
+    filter: blur(9px);
+
+    opacity: 0.55;
   }
 
   .hero {
@@ -1365,4 +1344,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-    }
+   }
