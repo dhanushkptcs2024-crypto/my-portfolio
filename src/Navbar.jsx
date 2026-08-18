@@ -4,69 +4,64 @@ import { NavLink, Link, useLocation } from "react-router-dom";
 function Navbar() {
   const location = useLocation();
 
-  // Glow is enabled only on Home page
-  const isHome = location.pathname === "/";
-
   return (
-    <nav className={`navbar glass ${isHome ? "home-navbar" : ""}`}>
+    <nav
+      className={`navbar ${
+        location.pathname === "/" ? "home-navbar" : "glass"
+      }`}
+    >
 
-      <div className="navbar-content">
+      <Link to="/" className="logo">
+        DHANUSH
+      </Link>
 
-        {/* LOGO */}
-        <Link to="/" className="logo">
-          DHANUSH
-        </Link>
+      <div className="nav-links">
 
-        {/* NAVIGATION */}
-        <div className="nav-links">
+        <NavLink
+          to="/"
+          end
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
+          Home
+        </NavLink>
 
-          <NavLink
-            to="/"
-            end
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Home
-          </NavLink>
+        <NavLink
+          to="/about"
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
+          About
+        </NavLink>
 
-          <NavLink
-            to="/about"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            About
-          </NavLink>
+        <NavLink
+          to="/skills"
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
+          Skills
+        </NavLink>
 
-          <NavLink
-            to="/skills"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Skills
-          </NavLink>
+        <NavLink
+          to="/projects"
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
+          Projects
+        </NavLink>
 
-          <NavLink
-            to="/projects"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Projects
-          </NavLink>
-
-          <NavLink
-            to="/contact"
-            className={({ isActive }) =>
-              isActive ? "nav-link active" : "nav-link"
-            }
-          >
-            Contact
-          </NavLink>
-
-        </div>
+        <NavLink
+          to="/contact"
+          className={({ isActive }) =>
+            isActive ? "nav-link active" : "nav-link"
+          }
+        >
+          Contact
+        </NavLink>
 
       </div>
 
