@@ -15,8 +15,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #010308;
   color: white;
-
-  /* SCROLLING FIX */
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -98,6 +96,93 @@ textarea {
   flex-shrink: 0;
 
   animation: navAnimation 0.7s ease;
+
+  /* REQUIRED FOR TRAVELING LIGHT */
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+/* =================================
+   NAVBAR TRAVELING LIGHT
+================================= */
+
+.navbar::before {
+  content: "";
+
+  position: absolute;
+
+  width: 90px;
+  height: 90px;
+
+  top: -45px;
+  left: -45px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(0, 240, 255, 1) 12%,
+    rgba(0, 210, 255, 0.8) 25%,
+    rgba(0, 180, 255, 0.35) 45%,
+    transparent 70%
+  );
+
+  filter: blur(2px);
+
+  box-shadow:
+    0 0 15px #00eaff,
+    0 0 30px #00d9ff,
+    0 0 55px rgba(0, 217, 255, 0.8);
+
+  animation: navbarTravelLight 4s linear infinite;
+
+  pointer-events: none;
+
+  z-index: 1;
+}
+
+/* Keep navbar content above the light */
+
+.navbar > * {
+  position: relative;
+  z-index: 3;
+}
+
+/* Traveling clockwise around navbar */
+
+@keyframes navbarTravelLight {
+
+  /* TOP LEFT */
+  0% {
+    top: -45px;
+    left: -45px;
+  }
+
+  /* TOP RIGHT */
+  25% {
+    top: -45px;
+    left: calc(100% - 45px);
+  }
+
+  /* BOTTOM RIGHT */
+  50% {
+    top: calc(100% - 45px);
+    left: calc(100% - 45px);
+  }
+
+  /* BOTTOM LEFT */
+  75% {
+    top: calc(100% - 45px);
+    left: -45px;
+  }
+
+  /* TOP LEFT */
+  100% {
+    top: -45px;
+    left: -45px;
+  }
 }
 
 /* LOGO */
