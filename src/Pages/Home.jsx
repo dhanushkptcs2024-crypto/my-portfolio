@@ -3,21 +3,16 @@ import { Link } from "react-router-dom";
 import Navbar from "../Navbar";
 
 function Home() {
-
   return (
-
     <div className="page">
-
       <Navbar />
 
       <main className="home-page">
-
         <div className="hero glass">
-
           <div className="hero-content">
 
             <p className="small-title">
-              CREATIVE DEVELOPER
+              WEB DEVELOPER
             </p>
 
             <h1>
@@ -36,7 +31,6 @@ function Home() {
             </p>
 
             <div className="hero-buttons">
-
               <Link
                 to="/projects"
                 className="btn primary-btn"
@@ -52,17 +46,12 @@ function Home() {
                 Contact Me
                 <span>→</span>
               </Link>
-
             </div>
 
           </div>
-
         </div>
-
       </main>
-
     </div>
-
   );
 }
 
