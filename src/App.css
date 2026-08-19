@@ -1,3 +1,7 @@
+/* =========================================================
+   GLOBAL
+========================================================= */
+
 * {
   margin: 0;
   padding: 0;
@@ -30,9 +34,10 @@ textarea {
   font-family: inherit;
 }
 
-/* ================================
+
+/* =========================================================
    MAIN PAGE
-================================ */
+========================================================= */
 
 .page {
   width: 100%;
@@ -56,9 +61,10 @@ textarea {
   position: relative;
 }
 
-/* ================================
+
+/* =========================================================
    GLASS EFFECT
-================================ */
+========================================================= */
 
 .glass {
   background: rgba(3, 13, 28, 0.25);
@@ -73,9 +79,10 @@ textarea {
     inset 0 0 25px rgba(0, 170, 255, 0.03);
 }
 
-/* ================================
+
+/* =========================================================
    NAVBAR
-================================ */
+========================================================= */
 
 .navbar {
   width: calc(100% - 70px);
@@ -97,83 +104,168 @@ textarea {
 
   animation: navAnimation 0.7s ease;
 
+  /* Important */
   position: relative;
+
+  /* Keep the animation inside the navbar */
+  overflow: hidden;
+
+  /* Creates correct stacking */
+  isolation: isolate;
 }
 
-/* ==========================================
+
+/* =========================================================
+   NORMAL NAVBAR BORDER
+========================================================= */
+
+.navbar {
+  border: 1px solid rgba(0, 196, 255, 0.35);
+}
+
+
+/* =========================================================
    TRAVELING BORDER LIGHT
-========================================== */
+========================================================= */
 
-/*
-   This creates ONLY a small bright section
-   on the navbar border.
+.navbar::before {
+  content: "";
 
-   No circle.
-   No moving ball.
-*/
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 18px;
+
+  padding: 1.5px;
+
+  /*
+     The bright section is very small.
+     Everything else is transparent.
+  */
+  background: conic-gradient(
+    from 0deg,
+
+    transparent 0deg,
+    transparent 335deg,
+
+    rgba(0, 210, 255, 0.15) 342deg,
+    rgba(0, 230, 255, 0.7) 348deg,
+
+    #ffffff 354deg,
+
+    #00eaff 357deg,
+    transparent 360deg
+  );
+
+  /*
+     Cut out the middle.
+
+     This means ONLY the border is visible.
+     There is NO circle and NO moving block.
+  */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+
+  -webkit-mask-composite: xor;
+
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+
+  mask-composite: exclude;
+
+  /*
+     Move the bright section around the border.
+  */
+  animation: travelingBorder 3s linear infinite;
+
+  pointer-events: none;
+
+  z-index: 5;
+}
+
+
+/* =========================================================
+   SOFT GLOW
+========================================================= */
 
 .navbar::after {
   content: "";
 
   position: absolute;
 
-  inset: -1px;
+  inset: 0;
 
   border-radius: 18px;
 
-  padding: 1px;
+  padding: 2px;
 
   background: conic-gradient(
     from 0deg,
+
     transparent 0deg,
-    transparent 300deg,
-    rgba(0, 217, 255, 0.15) 320deg,
-    #00eaff 340deg,
-    #ffffff 350deg,
-    #00eaff 360deg
+    transparent 335deg,
+
+    rgba(0, 217, 255, 0.05) 342deg,
+    rgba(0, 217, 255, 0.25) 350deg,
+    rgba(0, 217, 255, 0.05) 358deg,
+
+    transparent 360deg
   );
 
   -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
 
   -webkit-mask-composite: xor;
 
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+
   mask-composite: exclude;
 
-  animation: navbarBorderTravel 3s linear infinite;
+  filter: blur(3px);
+
+  animation: travelingBorder 3s linear infinite;
 
   pointer-events: none;
 
-  z-index: 10;
+  z-index: 4;
 }
 
-/* Make sure navbar content stays visible */
 
-.navbar > * {
-  position: relative;
+/* =========================================================
+   BORDER ROTATION
+========================================================= */
 
-  z-index: 20;
-}
+@keyframes travelingBorder {
 
-/* ==========================================
-   BORDER ANIMATION
-========================================== */
-
-@keyframes navbarBorderTravel {
-
-  0% {
+  from {
     transform: rotate(0deg);
   }
 
-  100% {
+  to {
     transform: rotate(360deg);
   }
 }
 
-/* ==========================================
+
+/* =========================================================
+   NAVBAR CONTENT
+========================================================= */
+
+.navbar > * {
+  position: relative;
+  z-index: 10;
+}
+
+
+/* =========================================================
    LOGO
-========================================== */
+========================================================= */
 
 .logo {
   padding: 11px 25px;
@@ -209,9 +301,10 @@ textarea {
   transform: translateY(-2px);
 }
 
-/* ================================
+
+/* =========================================================
    NAVIGATION
-================================ */
+========================================================= */
 
 .nav-links {
   display: flex;
@@ -260,9 +353,10 @@ textarea {
     0 0 10px #00d9ff;
 }
 
-/* ================================
+
+/* =========================================================
    HOME PAGE
-================================ */
+========================================================= */
 
 .home-page {
   flex: 1;
@@ -372,9 +466,10 @@ h1 span {
   margin-bottom: 30px;
 }
 
-/* ================================
+
+/* =========================================================
    BUTTONS
-================================ */
+========================================================= */
 
 .hero-buttons {
   display: flex;
@@ -443,9 +538,10 @@ h1 span {
   transform: translateY(-3px);
 }
 
-/* ================================
+
+/* =========================================================
    INNER PAGES
-================================ */
+========================================================= */
 
 .inner-page {
   flex: 1;
@@ -491,9 +587,10 @@ h1 span {
   line-height: 1.6;
 }
 
-/* ================================
+
+/* =========================================================
    ABOUT
-================================ */
+========================================================= */
 
 .about-content {
   display: grid;
@@ -573,9 +670,10 @@ h1 span {
   font-size: 13px;
 }
 
-/* ================================
+
+/* =========================================================
    SKILLS
-================================ */
+========================================================= */
 
 .skills-grid {
   display: grid;
@@ -642,9 +740,10 @@ h1 span {
     0 0 8px #00d9ff;
 }
 
-/* ================================
+
+/* =========================================================
    PROJECTS
-================================ */
+========================================================= */
 
 .projects-list {
   margin-top: 15px;
@@ -797,9 +896,10 @@ h1 span {
   transform: translateY(-3px);
 }
 
-/* ================================
+
+/* =========================================================
    CONTACT
-================================ */
+========================================================= */
 
 .contact-card {
   display: grid;
@@ -941,9 +1041,10 @@ h1 span {
   margin-top: 10px;
 }
 
-/* ================================
-   ANIMATIONS
-================================ */
+
+/* =========================================================
+   PAGE ANIMATIONS
+========================================================= */
 
 @keyframes navAnimation {
   from {
@@ -981,11 +1082,13 @@ h1 span {
   }
 }
 
-/* ================================
+
+/* =========================================================
    TABLET
-================================ */
+========================================================= */
 
 @media (max-width: 850px) {
+
   .navbar {
     width: calc(100% - 30px);
 
@@ -1060,20 +1163,20 @@ h1 span {
   }
 }
 
-/* ================================
+
+/* =========================================================
    MOBILE
-================================ */
+========================================================= */
 
 @media (max-width: 600px) {
+
   body {
     overflow-x: hidden;
-
     overflow-y: auto;
   }
 
   .page {
     min-height: 100vh;
-
     height: auto;
   }
 
@@ -1185,4 +1288,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-  }
+}
