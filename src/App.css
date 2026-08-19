@@ -16,6 +16,7 @@ body {
   background: #010308;
   color: white;
 
+  /* SCROLLING FIX */
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -30,7 +31,6 @@ input,
 textarea {
   font-family: inherit;
 }
-
 
 /* ================================
    MAIN PAGE
@@ -58,7 +58,6 @@ textarea {
   position: relative;
 }
 
-
 /* ================================
    GLASS EFFECT
 ================================ */
@@ -75,7 +74,6 @@ textarea {
     0 0 30px rgba(0, 120, 255, 0.08),
     inset 0 0 25px rgba(0, 170, 255, 0.03);
 }
-
 
 /* ================================
    NAVBAR
@@ -99,129 +97,10 @@ textarea {
 
   flex-shrink: 0;
 
-  position: relative;
-
-  overflow: hidden;
-
   animation: navAnimation 0.7s ease;
 }
 
-
-/* ==================================================
-   SMOOTH NAVBAR TRAVELING BORDER
-   ================================================== */
-
-.navbar-travel-svg {
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  width: 100%;
-  height: 100%;
-
-  pointer-events: none;
-
-  z-index: 1;
-
-  overflow: visible;
-}
-
-
-/*
-   This is ONE continuous rounded rectangle.
-
-   The light therefore follows:
-
-       ────────────────→
-      ╭────────────────╮
-      │                ↓
-      │                ↓
-      ╰────────────────╯
-       ←────────────────
-*/
-
-.navbar-travel-path {
-  fill: none;
-
-  stroke: #00d9ff;
-
-  stroke-width: 1.8;
-
-  stroke-linecap: round;
-  stroke-linejoin: round;
-
-  /*
-     0.075 = length of the visible light
-     0.925 = invisible part
-
-     Because pathLength is 1,
-     these values work regardless of
-     navbar width.
-  */
-  stroke-dasharray: 0.075 0.925;
-
-  stroke-dashoffset: 0;
-
-  /*
-     Strong glow around ONLY the border light.
-  */
-  filter:
-    drop-shadow(0 0 2px #ffffff)
-    drop-shadow(0 0 5px #00d9ff)
-    drop-shadow(0 0 10px #00d9ff)
-    drop-shadow(0 0 18px rgba(0, 217, 255, 0.85));
-
-  animation:
-    smoothNavbarTravel 4.5s linear infinite;
-}
-
-
-/*
-   ONE continuous animation.
-
-   No separate top/right/bottom/left animations.
-
-   This is what makes the corners smooth.
-*/
-
-@keyframes smoothNavbarTravel {
-
-  0% {
-    stroke-dashoffset: 0;
-    opacity: 0;
-  }
-
-  4% {
-    opacity: 1;
-  }
-
-  96% {
-    opacity: 1;
-  }
-
-  100% {
-    stroke-dashoffset: -1;
-    opacity: 0;
-  }
-}
-
-
-/*
-   Keep your actual navbar content
-   above the traveling light.
-*/
-
-.navbar .logo,
-.navbar .nav-links {
-  position: relative;
-  z-index: 2;
-}
-
-
-/* ================================
-   LOGO
-================================ */
+/* LOGO */
 
 .logo {
   padding: 11px 25px;
@@ -257,10 +136,7 @@ textarea {
   transform: translateY(-2px);
 }
 
-
-/* ================================
-   NAVIGATION
-================================ */
+/* NAVIGATION */
 
 .nav-links {
   display: flex;
@@ -308,7 +184,6 @@ textarea {
   box-shadow:
     0 0 10px #00d9ff;
 }
-
 
 /* ================================
    HOME PAGE
@@ -422,7 +297,6 @@ h1 span {
   margin-bottom: 30px;
 }
 
-
 /* ================================
    BUTTONS
 ================================ */
@@ -494,7 +368,6 @@ h1 span {
   transform: translateY(-3px);
 }
 
-
 /* ================================
    INNER PAGES
 ================================ */
@@ -542,7 +415,6 @@ h1 span {
 
   line-height: 1.6;
 }
-
 
 /* ================================
    ABOUT
@@ -626,7 +498,6 @@ h1 span {
   font-size: 13px;
 }
 
-
 /* ================================
    SKILLS
 ================================ */
@@ -695,7 +566,6 @@ h1 span {
   box-shadow:
     0 0 8px #00d9ff;
 }
-
 
 /* ================================
    PROJECTS
@@ -852,7 +722,6 @@ h1 span {
   transform: translateY(-3px);
 }
 
-
 /* ================================
    CONTACT
 ================================ */
@@ -997,7 +866,6 @@ h1 span {
   margin-top: 10px;
 }
 
-
 /* ================================
    ANIMATIONS
 ================================ */
@@ -1038,13 +906,11 @@ h1 span {
   }
 }
 
-
 /* ================================
    TABLET
 ================================ */
 
 @media (max-width: 850px) {
-
   .navbar {
     width: calc(100% - 30px);
 
@@ -1119,13 +985,11 @@ h1 span {
   }
 }
 
-
 /* ================================
    MOBILE
 ================================ */
 
 @media (max-width: 600px) {
-
   body {
     overflow-x: hidden;
 
@@ -1246,4 +1110,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-  }
+    }
