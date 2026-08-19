@@ -12,7 +12,7 @@ function Home() {
           <div className="hero-content">
 
             <p className="small-title">
-              WEB DEVELOPER
+              WELCOME TO MY PORTFOLIO
             </p>
 
             <h1>
@@ -20,7 +20,7 @@ function Home() {
             </h1>
 
             <h2>
-              React Developer | Computer Science Student
+              Web Developer | Computer Science Student
             </h2>
 
             <p className="hero-description">
