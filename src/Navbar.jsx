@@ -2,27 +2,10 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
 function Navbar() {
-  return (
-    <nav className="navbar glass">
 
-      {/* Smooth traveling border light */}
-      <svg
-        className="navbar-travel-svg"
-        viewBox="0 0 100 100"
-        preserveAspectRatio="none"
-        aria-hidden="true"
-      >
-        <rect
-          className="navbar-travel-path"
-          x="0.8"
-          y="0.8"
-          width="98.4"
-          height="98.4"
-          rx="18"
-          ry="18"
-          pathLength="1"
-        />
-      </svg>
+  return (
+
+    <nav className="navbar glass">
 
       <Link to="/" className="logo">
         DHANUSH
@@ -79,6 +62,7 @@ function Navbar() {
       </div>
 
     </nav>
+
   );
 }
 
