@@ -5,17 +5,18 @@ function Navbar() {
   return (
     <nav className="navbar">
 
-      {/* Animated border */}
-      <span className="navbar-light"></span>
-
       {/* Glass background */}
       <div className="navbar-glass"></div>
 
-      {/* Navbar content */}
+      {/* Thin traveling border light */}
+      <span className="navbar-border-light"></span>
+
+      {/* Logo */}
       <Link to="/" className="logo">
         DHANUSH
       </Link>
 
+      {/* Navigation */}
       <div className="nav-links">
 
         <NavLink
