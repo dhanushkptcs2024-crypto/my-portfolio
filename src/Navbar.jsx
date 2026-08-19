@@ -8,8 +8,8 @@ function Navbar() {
       {/* Glass background */}
       <div className="navbar-glass"></div>
 
-      {/* Thin traveling border light */}
-      <span className="navbar-border-light"></span>
+      {/* Single thin traveling color light */}
+      <div className="navbar-border-light"></div>
 
       {/* Logo */}
       <Link to="/" className="logo">
