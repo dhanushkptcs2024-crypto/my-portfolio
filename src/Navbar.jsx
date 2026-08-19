@@ -2,15 +2,18 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
 function Navbar() {
-
   return (
-
     <nav className="navbar glass">
 
+      {/* Traveling border light */}
+      <span className="travel-light"></span>
+
+      {/* Logo */}
       <Link to="/" className="logo">
         DHANUSH
       </Link>
 
+      {/* Navigation */}
       <div className="nav-links">
 
         <NavLink
@@ -62,7 +65,6 @@ function Navbar() {
       </div>
 
     </nav>
-
   );
 }
 
