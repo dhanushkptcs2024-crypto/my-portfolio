@@ -41,7 +41,6 @@ textarea {
 .page {
   width: 100%;
   min-height: 100vh;
-  height: auto;
 
   background:
     linear-gradient(
@@ -61,7 +60,7 @@ textarea {
 }
 
 /* =========================================
-   GLASS EFFECT
+   GLASS
 ========================================= */
 
 .glass {
@@ -79,16 +78,17 @@ textarea {
 
 /* =========================================
    NAVBAR
-   TRAVELING BORDER LIGHT
 ========================================= */
 
 .navbar {
   width: calc(100% - 70px);
   max-width: 1250px;
 
-  min-height: 70px;
+  height: 70px;
 
   margin: 16px auto 0;
+
+  padding: 0 25px;
 
   border-radius: 18px;
 
@@ -96,21 +96,18 @@ textarea {
   align-items: center;
   justify-content: space-between;
 
-  padding: 0 25px;
-
-  flex-shrink: 0;
-
   position: relative;
 
+  /*
+    IMPORTANT:
+    visible is needed so the traveling
+    light is not accidentally clipped.
+  */
   overflow: hidden;
 
-  animation: navAnimation 0.7s ease;
+  background: rgba(3, 13, 28, 0.42);
 
-  /* Glass background */
-  background: rgba(3, 13, 28, 0.25);
-
-  /* Normal subtle border */
-  border: 1px solid rgba(0, 196, 255, 0.22);
+  border: 1px solid rgba(0, 196, 255, 0.25);
 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -118,10 +115,14 @@ textarea {
   box-shadow:
     0 0 30px rgba(0, 120, 255, 0.08),
     inset 0 0 25px rgba(0, 170, 255, 0.03);
+
+  flex-shrink: 0;
+
+  animation: navAnimation 0.7s ease;
 }
 
 /* =========================================
-   MOVING LIGHT AROUND BORDER
+   TRAVELING BORDER LIGHT
 ========================================= */
 
 .navbar::before {
@@ -129,47 +130,45 @@ textarea {
 
   position: absolute;
 
-  inset: 0;
+  width: 180%;
+  height: 180%;
 
-  border-radius: 18px;
+  left: -40%;
+  top: -40%;
 
-  padding: 1.5px;
+  background: conic-gradient(
+    from 0deg,
 
-  background:
-    conic-gradient(
-      from 0deg,
-      transparent 0deg,
-      transparent 25deg,
-      rgba(0, 217, 255, 0.1) 50deg,
-      #00d9ff 70deg,
-      #ffffff 82deg,
-      #00d9ff 94deg,
-      rgba(0, 217, 255, 0.1) 115deg,
-      transparent 145deg,
-      transparent 360deg
-    );
+    transparent 0deg,
 
-  animation: navbarLightTravel 4s linear infinite;
+    transparent 250deg,
 
-  /*
-    Keep only the border visible
-  */
+    rgba(0, 217, 255, 0.05) 275deg,
 
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
+    rgba(0, 217, 255, 0.25) 290deg,
 
-  -webkit-mask-composite: xor;
+    #00d9ff 300deg,
 
-  mask-composite: exclude;
+    #ffffff 308deg,
+
+    #00d9ff 316deg,
+
+    rgba(0, 217, 255, 0.2) 330deg,
+
+    transparent 345deg,
+
+    transparent 360deg
+  );
+
+  animation: travelLight 3.5s linear infinite;
+
+  z-index: 1;
 
   pointer-events: none;
-
-  z-index: 5;
 }
 
 /* =========================================
-   SOFT INNER GLOW
+   INNER NAVBAR GLASS
 ========================================= */
 
 .navbar::after {
@@ -177,40 +176,43 @@ textarea {
 
   position: absolute;
 
-  inset: 1px;
+  inset: 2px;
 
-  border-radius: 17px;
+  border-radius: 16px;
+
+  background: rgba(3, 13, 28, 0.92);
 
   box-shadow:
-    inset 0 0 25px rgba(0, 180, 255, 0.04);
+    inset 0 0 25px rgba(0, 170, 255, 0.04);
+
+  z-index: 2;
 
   pointer-events: none;
-
-  z-index: 1;
 }
 
 /* =========================================
-   MOVING LIGHT ANIMATION
+   MOVING LIGHT ROTATION
 ========================================= */
 
-@keyframes navbarLightTravel {
+@keyframes travelLight {
 
-  from {
+  0% {
     transform: rotate(0deg);
   }
 
-  to {
+  100% {
     transform: rotate(360deg);
   }
 
 }
 
 /* =========================================
-   KEEP NAVBAR CONTENT ABOVE LIGHT
+   NAVBAR CONTENT ABOVE ANIMATION
 ========================================= */
 
 .navbar > * {
   position: relative;
+
   z-index: 10;
 }
 
@@ -304,7 +306,7 @@ textarea {
 }
 
 /* =========================================
-   HOME PAGE
+   HOME
 ========================================= */
 
 .home-page {
@@ -429,7 +431,6 @@ h1 span {
   display: inline-flex;
 
   align-items: center;
-
   justify-content: center;
 
   gap: 10px;
@@ -989,6 +990,7 @@ h1 span {
 ========================================= */
 
 @keyframes navAnimation {
+
   from {
     opacity: 0;
     transform: translateY(-20px);
@@ -998,9 +1000,11 @@ h1 span {
     opacity: 1;
     transform: translateY(0);
   }
+
 }
 
 @keyframes heroAnimation {
+
   from {
     opacity: 0;
     transform: translateY(25px) scale(0.98);
@@ -1010,9 +1014,11 @@ h1 span {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
+
 }
 
 @keyframes pageAnimation {
+
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -1022,6 +1028,7 @@ h1 span {
     opacity: 1;
     transform: translateY(0);
   }
+
 }
 
 /* =========================================
@@ -1102,6 +1109,7 @@ h1 span {
 
     gap: 25px;
   }
+
 }
 
 /* =========================================
@@ -1232,4 +1240,5 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-  }
+
+                  }
