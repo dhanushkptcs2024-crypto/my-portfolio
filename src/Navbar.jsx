@@ -5,21 +5,22 @@ function Navbar() {
   return (
     <nav className="navbar glass">
 
-      {/* ONLY the traveling border light */}
+      {/* Smooth traveling border light */}
       <svg
-        className="navbar-travel-border"
+        className="navbar-travel-svg"
         viewBox="0 0 100 100"
         preserveAspectRatio="none"
         aria-hidden="true"
       >
         <rect
-          x="0.5"
-          y="0.5"
-          width="99"
-          height="99"
+          className="navbar-travel-path"
+          x="0.8"
+          y="0.8"
+          width="98.4"
+          height="98.4"
           rx="18"
           ry="18"
-          pathLength="100"
+          pathLength="1"
         />
       </svg>
 
