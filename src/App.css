@@ -19,7 +19,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #010308;
   color: white;
-
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -63,6 +62,24 @@ textarea {
 
 
 /* =========================================
+   GLASS
+========================================= */
+
+.glass {
+  background: rgba(3, 13, 28, 0.25);
+
+  border: 1px solid rgba(0, 196, 255, 0.35);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 0 30px rgba(0, 120, 255, 0.08),
+    inset 0 0 25px rgba(0, 170, 255, 0.03);
+}
+
+
+/* =========================================
    NAVBAR
 ========================================= */
 
@@ -74,13 +91,13 @@ textarea {
 
   margin: 16px auto 0;
 
-  padding: 0 25px;
-
   border-radius: 18px;
 
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  padding: 0 25px;
 
   position: relative;
 
@@ -90,13 +107,15 @@ textarea {
 
   animation: navAnimation 0.7s ease;
 
-  /* Very thin normal border */
-  border: 1px solid rgba(0, 196, 255, 0.25);
+  /*
+     Normal very thin border
+  */
+  border: 1px solid rgba(0, 200, 255, 0.20);
 }
 
 
 /* =========================================
-   NAVBAR GLASS
+   NAVBAR GLASS LAYER
 ========================================= */
 
 .navbar-glass {
@@ -106,7 +125,7 @@ textarea {
 
   border-radius: 18px;
 
-  background: rgba(3, 13, 28, 0.55);
+  background: rgba(3, 13, 28, 0.45);
 
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
@@ -121,67 +140,42 @@ textarea {
 
 
 /* =========================================
-   SMOOTH MULTI-COLOR TRAVELING LIGHT
+   ✨ SINGLE TRAVELING LIGHT
 ========================================= */
 
 .navbar-border-light {
   position: absolute;
 
-  width: 55px;
+  width: 48px;
   height: 1px;
-
-  /*
-    Mixed colors:
-    Cyan → Blue → Violet → Cyan
-  */
-  background: linear-gradient(
-    90deg,
-    #00eaff,
-    #008cff,
-    #7b5cff,
-    #00eaff
-  );
-
-  background-size: 300% 100%;
 
   border-radius: 50%;
 
-  /*
-    Very thin soft glow
-  */
-  box-shadow:
-    0 0 2px #ffffff,
-    0 0 5px #00eaff,
-    0 0 9px #008cff,
-    0 0 14px rgba(123, 92, 255, 0.55);
-
   z-index: 5;
 
+  pointer-events: none;
+
   /*
-    Makes the light follow the complete
-    rounded rectangle border.
+     The light follows the rounded navbar border
   */
   offset-path: inset(0 round 18px);
 
   offset-distance: 0%;
 
   /*
-    5 seconds = smooth travel
-    3 seconds = smooth color movement
+     Smooth movement
   */
   animation:
-    navbarBorderTravel 5s linear infinite,
-    borderColorFlow 3s ease-in-out infinite;
-
-  pointer-events: none;
+    navbarLightTravel 7s linear infinite,
+    navbarLightColor 7s linear infinite;
 }
 
 
 /* =========================================
-   BORDER TRAVEL
+   LIGHT TRAVEL
 ========================================= */
 
-@keyframes navbarBorderTravel {
+@keyframes navbarLightTravel {
 
   0% {
     offset-distance: 0%;
@@ -195,23 +189,135 @@ textarea {
 
 
 /* =========================================
-   COLOR FLOW
+   🌈 ONE LIGHT — COLOR CHANGES SMOOTHLY
 ========================================= */
 
-@keyframes borderColorFlow {
+@keyframes navbarLightColor {
+
+  /*
+     CYAN
+  */
 
   0% {
-    background-position: 0% 50%;
+    background: #00eaff;
+
+    box-shadow:
+      0 0 2px #00eaff,
+      0 0 6px #00eaff,
+      0 0 12px rgba(0, 234, 255, 0.55);
   }
+
+
+  /*
+     BLUE
+  */
+
+  12.5% {
+    background: #0066ff;
+
+    box-shadow:
+      0 0 2px #0066ff,
+      0 0 6px #0066ff,
+      0 0 12px rgba(0, 102, 255, 0.55);
+  }
+
+
+  /*
+     PURPLE
+  */
+
+  25% {
+    background: #7200ff;
+
+    box-shadow:
+      0 0 2px #7200ff,
+      0 0 6px #7200ff,
+      0 0 12px rgba(114, 0, 255, 0.55);
+  }
+
+
+  /*
+     MAGENTA
+  */
+
+  37.5% {
+    background: #d000ff;
+
+    box-shadow:
+      0 0 2px #d000ff,
+      0 0 6px #d000ff,
+      0 0 12px rgba(208, 0, 255, 0.55);
+  }
+
+
+  /*
+     PINK
+  */
 
   50% {
-    background-position: 100% 50%;
+    background: #ff008c;
+
+    box-shadow:
+      0 0 2px #ff008c,
+      0 0 6px #ff008c,
+      0 0 12px rgba(255, 0, 140, 0.55);
   }
+
+
+  /*
+     ORANGE
+  */
+
+  62.5% {
+    background: #ff4d00;
+
+    box-shadow:
+      0 0 2px #ff4d00,
+      0 0 6px #ff4d00,
+      0 0 12px rgba(255, 77, 0, 0.55);
+  }
+
+
+  /*
+     YELLOW
+  */
+
+  75% {
+    background: #ffd000;
+
+    box-shadow:
+      0 0 2px #ffd000,
+      0 0 6px #ffd000,
+      0 0 12px rgba(255, 208, 0, 0.55);
+  }
+
+
+  /*
+     GREEN
+  */
+
+  87.5% {
+    background: #00ff88;
+
+    box-shadow:
+      0 0 2px #00ff88,
+      0 0 6px #00ff88,
+      0 0 12px rgba(0, 255, 136, 0.55);
+  }
+
+
+  /*
+     BACK TO CYAN
+  */
 
   100% {
-    background-position: 0% 50%;
-  }
+    background: #00eaff;
 
+    box-shadow:
+      0 0 2px #00eaff,
+      0 0 6px #00eaff,
+      0 0 12px rgba(0, 234, 255, 0.55);
+  }
 }
 
 
@@ -222,7 +328,6 @@ textarea {
 .navbar > .logo,
 .navbar > .nav-links {
   position: relative;
-
   z-index: 10;
 }
 
@@ -352,17 +457,6 @@ textarea {
   align-items: center;
 
   animation: heroAnimation 0.9s ease;
-
-  background: rgba(3, 13, 28, 0.25);
-
-  border: 1px solid rgba(0, 196, 255, 0.35);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  box-shadow:
-    0 0 30px rgba(0, 120, 255, 0.08),
-    inset 0 0 25px rgba(0, 170, 255, 0.03);
 }
 
 .hero::after {
@@ -542,17 +636,6 @@ h1 span {
   overflow: visible;
 
   animation: pageAnimation 0.7s ease;
-
-  background: rgba(3, 13, 28, 0.25);
-
-  border: 1px solid rgba(0, 196, 255, 0.35);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  box-shadow:
-    0 0 30px rgba(0, 120, 255, 0.08),
-    inset 0 0 25px rgba(0, 170, 255, 0.03);
 }
 
 .page-heading {
@@ -630,10 +713,6 @@ h1 span {
 
   padding: 20px;
 
-  background: rgba(3, 13, 28, 0.25);
-
-  border: 1px solid rgba(0, 196, 255, 0.35);
-
   transition: 0.3s ease;
 }
 
@@ -686,13 +765,11 @@ h1 span {
 
   justify-content: center;
 
+  position: relative;
+
   gap: 10px;
 
   transition: 0.3s ease;
-
-  background: rgba(3, 13, 28, 0.25);
-
-  border: 1px solid rgba(0, 196, 255, 0.35);
 }
 
 .skill-card:hover {
@@ -755,10 +832,6 @@ h1 span {
   gap: 30px;
 
   transition: 0.3s ease;
-
-  background: rgba(3, 13, 28, 0.25);
-
-  border: 1px solid rgba(0, 196, 255, 0.35);
 }
 
 .project-card:hover {
@@ -989,10 +1062,6 @@ h1 span {
   flex-direction: column;
 
   gap: 10px;
-
-  background: rgba(3, 13, 28, 0.25);
-
-  border: 1px solid rgba(0, 196, 255, 0.35);
 }
 
 .contact-form label {
@@ -1097,7 +1166,6 @@ h1 span {
 
   .navbar {
     width: calc(100% - 30px);
-
     padding: 0 15px;
   }
 
@@ -1111,15 +1179,12 @@ h1 span {
 
   .logo {
     font-size: 15px;
-
     padding: 9px 13px;
-
     letter-spacing: 2px;
   }
 
   .hero {
     padding: 40px 30px;
-
     min-height: 380px;
   }
 
@@ -1150,7 +1215,6 @@ h1 span {
 
   .about-content {
     grid-template-columns: 1fr;
-
     gap: 25px;
   }
 
@@ -1164,7 +1228,6 @@ h1 span {
 
   .contact-card {
     grid-template-columns: 1fr;
-
     gap: 25px;
   }
 
@@ -1177,13 +1240,20 @@ h1 span {
 
 @media (max-width: 600px) {
 
+  body {
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .page {
+    min-height: 100vh;
+    height: auto;
+  }
+
   .navbar {
     width: calc(100% - 20px);
-
     height: 60px;
-
     padding: 0 12px;
-
     border-radius: 15px;
   }
 
@@ -1192,17 +1262,11 @@ h1 span {
   }
 
   .navbar-border-light {
-    width: 40px;
+    width: 38px;
 
     height: 1px;
 
     offset-path: inset(0 round 15px);
-
-    box-shadow:
-      0 0 2px #ffffff,
-      0 0 5px #00eaff,
-      0 0 8px #008cff,
-      0 0 12px rgba(123, 92, 255, 0.5);
   }
 
   .nav-links {
@@ -1213,6 +1277,10 @@ h1 span {
     font-size: 9px;
   }
 
+  .nav-link.active::after {
+    bottom: -6px;
+  }
+
   .logo {
     font-size: 12px;
 
@@ -1221,13 +1289,8 @@ h1 span {
     letter-spacing: 2px;
   }
 
-  .nav-link.active::after {
-    bottom: -6px;
-  }
-
   .hero {
     padding: 30px 22px;
-
     min-height: 360px;
   }
 
@@ -1241,7 +1304,6 @@ h1 span {
 
   .hero-buttons {
     flex-direction: column;
-
     width: 100%;
   }
 
@@ -1251,13 +1313,13 @@ h1 span {
 
   .inner-page {
     align-items: flex-start;
-
     padding: 20px 15px 40px;
   }
 
   .page-card {
     width: 100%;
-
+    max-height: none;
+    overflow: visible;
     padding: 25px 20px;
   }
 
@@ -1272,7 +1334,6 @@ h1 span {
 
   .skills-grid {
     grid-template-columns: repeat(2, 1fr);
-
     gap: 12px;
   }
 
@@ -1286,15 +1347,12 @@ h1 span {
 
   .project-card {
     padding: 20px;
-
     gap: 15px;
   }
 
   .project-icon {
     width: 70px;
-
     height: 70px;
-
     font-size: 22px;
   }
 
@@ -1314,4 +1372,4 @@ h1 span {
     padding: 20px;
   }
 
-     }
+   }
