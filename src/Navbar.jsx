@@ -5,11 +5,8 @@ function Navbar() {
   return (
     <nav className="navbar">
 
-      {/* Glass background */}
-      <div className="navbar-glass"></div>
-
-      {/* Single thin traveling color light */}
-      <div className="navbar-border-light"></div>
+      {/* Single thin glowing light */}
+      <span className="travel-light"></span>
 
       {/* Logo */}
       <Link to="/" className="logo">
