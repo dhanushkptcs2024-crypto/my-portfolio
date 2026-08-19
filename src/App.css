@@ -15,7 +15,6 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #010308;
   color: white;
-
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -96,15 +95,17 @@ textarea {
 
   flex-shrink: 0;
 
-  animation: navAnimation 0.7s ease;
-
-  /* TRAVELING BORDER */
   position: relative;
   isolation: isolate;
+
+  animation: navAnimation 0.7s ease;
+
+  /* Important for correct logo position */
+  overflow: visible;
 }
 
 /* ================================
-   NAVBAR TRAVELING LIGHT
+   SMOOTH NAVBAR LIGHT
 ================================ */
 
 @property --nav-angle {
@@ -114,32 +115,38 @@ textarea {
 }
 
 @keyframes nav-travel {
+  from {
+    --nav-angle: 0deg;
+  }
+
   to {
     --nav-angle: 360deg;
   }
 }
 
-.navbar::before,
-.navbar::after {
+/* Main traveling light */
+
+.navbar::before {
   content: "";
 
   position: absolute;
 
   inset: -1.5px;
 
-  border-radius: inherit;
+  border-radius: 18px;
 
   padding: 1.5px;
 
-  background: conic-gradient(
-    from var(--nav-angle),
-    transparent 0deg,
-    transparent 250deg,
-    rgba(180, 80, 255, 0.75) 290deg,
-    rgba(80, 120, 255, 1) 325deg,
-    rgba(0, 220, 255, 1) 352deg,
-    rgba(220, 250, 255, 1) 360deg
-  );
+  background:
+    conic-gradient(
+      from var(--nav-angle),
+      transparent 0deg,
+      transparent 250deg,
+      rgba(150, 70, 255, 0.45) 285deg,
+      rgba(70, 130, 255, 0.85) 320deg,
+      rgba(0, 210, 255, 1) 345deg,
+      rgba(255, 255, 255, 1) 360deg
+    );
 
   -webkit-mask:
     linear-gradient(#000 0 0) content-box,
@@ -152,19 +159,57 @@ textarea {
   -webkit-mask-composite: xor;
   mask-composite: exclude;
 
-  animation: nav-travel 6s linear infinite;
-
   pointer-events: none;
 
   z-index: -1;
+
+  animation: nav-travel 5s linear infinite;
 }
 
-/* Glow around traveling light */
+/* Soft glow */
 
 .navbar::after {
-  filter: blur(7px);
+  content: "";
 
-  opacity: 0.9;
+  position: absolute;
+
+  inset: -2px;
+
+  border-radius: 18px;
+
+  padding: 2px;
+
+  background:
+    conic-gradient(
+      from var(--nav-angle),
+      transparent 0deg,
+      transparent 260deg,
+      rgba(130, 70, 255, 0.25) 300deg,
+      rgba(60, 140, 255, 0.5) 330deg,
+      rgba(0, 220, 255, 0.75) 350deg,
+      rgba(255, 255, 255, 0.75) 360deg
+    );
+
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+
+  filter: blur(6px);
+
+  opacity: 0.55;
+
+  pointer-events: none;
+
+  z-index: -2;
+
+  animation: nav-travel 5s linear infinite;
 }
 
 /* ================================
@@ -192,6 +237,12 @@ textarea {
     0 0 15px rgba(0, 190, 255, 0.22);
 
   transition: 0.3s ease;
+
+  position: relative;
+
+  z-index: 2;
+
+  flex-shrink: 0;
 }
 
 .logo:hover {
@@ -215,6 +266,10 @@ textarea {
   align-items: center;
 
   gap: 38px;
+
+  position: relative;
+
+  z-index: 2;
 }
 
 .nav-link {
@@ -1075,6 +1130,8 @@ h1 span {
 
   .navbar {
     height: 60px;
+
+    padding: 0 12px;
   }
 
   .nav-links {
@@ -1087,6 +1144,14 @@ h1 span {
 
   .nav-link.active::after {
     bottom: -6px;
+  }
+
+  .logo {
+    font-size: 13px;
+
+    padding: 8px 10px;
+
+    letter-spacing: 2px;
   }
 
   .hero {
@@ -1181,4 +1246,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-   }
+}
