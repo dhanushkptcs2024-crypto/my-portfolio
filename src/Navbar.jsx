@@ -3,17 +3,12 @@ import { NavLink, Link } from "react-router-dom";
 
 function Navbar() {
   return (
-    <nav className="navbar">
+    <nav className="navbar glass">
 
-      {/* Single thin glowing light */}
-      <span className="travel-light"></span>
-
-      {/* Logo */}
       <Link to="/" className="logo">
         DHANUSH
       </Link>
 
-      {/* Navigation */}
       <div className="nav-links">
 
         <NavLink
