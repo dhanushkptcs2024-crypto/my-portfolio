@@ -2,11 +2,16 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
 function Navbar() {
-
   return (
+    <nav className="navbar">
 
-    <nav className="navbar glass">
+      {/* Animated border */}
+      <span className="navbar-light"></span>
 
+      {/* Glass background */}
+      <div className="navbar-glass"></div>
+
+      {/* Navbar content */}
       <Link to="/" className="logo">
         DHANUSH
       </Link>
@@ -62,7 +67,6 @@ function Navbar() {
       </div>
 
     </nav>
-
   );
 }
 
