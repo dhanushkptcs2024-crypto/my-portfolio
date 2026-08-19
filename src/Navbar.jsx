@@ -5,15 +5,28 @@ function Navbar() {
   return (
     <nav className="navbar glass">
 
-      {/* Traveling border light */}
-      <span className="travel-light"></span>
+      {/* ONLY the traveling border light */}
+      <svg
+        className="navbar-travel-border"
+        viewBox="0 0 100 100"
+        preserveAspectRatio="none"
+        aria-hidden="true"
+      >
+        <rect
+          x="0.5"
+          y="0.5"
+          width="99"
+          height="99"
+          rx="18"
+          ry="18"
+          pathLength="100"
+        />
+      </svg>
 
-      {/* Logo */}
       <Link to="/" className="logo">
         DHANUSH
       </Link>
 
-      {/* Navigation */}
       <div className="nav-links">
 
         <NavLink
