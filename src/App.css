@@ -97,95 +97,83 @@ textarea {
 
   animation: navAnimation 0.7s ease;
 
-  /* REQUIRED FOR TRAVELING LIGHT */
   position: relative;
-  isolation: isolate;
-  overflow: hidden;
 }
 
-/* =================================
-   NAVBAR TRAVELING LIGHT
-================================= */
+/* ==========================================
+   TRAVELING BORDER LIGHT
+========================================== */
 
-.navbar::before {
+/*
+   This creates ONLY a small bright section
+   on the navbar border.
+
+   No circle.
+   No moving ball.
+*/
+
+.navbar::after {
   content: "";
 
   position: absolute;
 
-  width: 90px;
-  height: 90px;
+  inset: -1px;
 
-  top: -45px;
-  left: -45px;
+  border-radius: 18px;
 
-  border-radius: 50%;
+  padding: 1px;
 
-  background: radial-gradient(
-    circle,
-    rgba(255, 255, 255, 1) 0%,
-    rgba(0, 240, 255, 1) 12%,
-    rgba(0, 210, 255, 0.8) 25%,
-    rgba(0, 180, 255, 0.35) 45%,
-    transparent 70%
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 300deg,
+    rgba(0, 217, 255, 0.15) 320deg,
+    #00eaff 340deg,
+    #ffffff 350deg,
+    #00eaff 360deg
   );
 
-  filter: blur(2px);
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
 
-  box-shadow:
-    0 0 15px #00eaff,
-    0 0 30px #00d9ff,
-    0 0 55px rgba(0, 217, 255, 0.8);
+  -webkit-mask-composite: xor;
 
-  animation: navbarTravelLight 4s linear infinite;
+  mask-composite: exclude;
+
+  animation: navbarBorderTravel 3s linear infinite;
 
   pointer-events: none;
 
-  z-index: 1;
+  z-index: 10;
 }
 
-/* Keep navbar content above the light */
+/* Make sure navbar content stays visible */
 
 .navbar > * {
   position: relative;
-  z-index: 3;
+
+  z-index: 20;
 }
 
-/* Traveling clockwise around navbar */
+/* ==========================================
+   BORDER ANIMATION
+========================================== */
 
-@keyframes navbarTravelLight {
+@keyframes navbarBorderTravel {
 
-  /* TOP LEFT */
   0% {
-    top: -45px;
-    left: -45px;
+    transform: rotate(0deg);
   }
 
-  /* TOP RIGHT */
-  25% {
-    top: -45px;
-    left: calc(100% - 45px);
-  }
-
-  /* BOTTOM RIGHT */
-  50% {
-    top: calc(100% - 45px);
-    left: calc(100% - 45px);
-  }
-
-  /* BOTTOM LEFT */
-  75% {
-    top: calc(100% - 45px);
-    left: -45px;
-  }
-
-  /* TOP LEFT */
   100% {
-    top: -45px;
-    left: -45px;
+    transform: rotate(360deg);
   }
 }
 
-/* LOGO */
+/* ==========================================
+   LOGO
+========================================== */
 
 .logo {
   padding: 11px 25px;
@@ -221,7 +209,9 @@ textarea {
   transform: translateY(-2px);
 }
 
-/* NAVIGATION */
+/* ================================
+   NAVIGATION
+================================ */
 
 .nav-links {
   display: flex;
@@ -1195,4 +1185,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-}
+  }
