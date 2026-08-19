@@ -34,6 +34,7 @@ textarea {
   font-family: inherit;
 }
 
+
 /* =========================================
    MAIN PAGE
 ========================================= */
@@ -59,22 +60,6 @@ textarea {
   position: relative;
 }
 
-/* =========================================
-   GLASS
-========================================= */
-
-.glass {
-  background: rgba(3, 13, 28, 0.25);
-
-  border: 1px solid rgba(0, 196, 255, 0.35);
-
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-
-  box-shadow:
-    0 0 30px rgba(0, 120, 255, 0.08),
-    inset 0 0 25px rgba(0, 170, 255, 0.03);
-}
 
 /* =========================================
    NAVBAR
@@ -98,14 +83,26 @@ textarea {
 
   position: relative;
 
-  /*
-    IMPORTANT:
-    visible is needed so the traveling
-    light is not accidentally clipped.
-  */
   overflow: hidden;
 
-  background: rgba(3, 13, 28, 0.42);
+  flex-shrink: 0;
+
+  animation: navAnimation 0.7s ease;
+}
+
+
+/* =========================================
+   GLASS BACKGROUND
+========================================= */
+
+.navbar-glass {
+  position: absolute;
+
+  inset: 0;
+
+  border-radius: 18px;
+
+  background: rgba(3, 13, 28, 0.55);
 
   border: 1px solid rgba(0, 196, 255, 0.25);
 
@@ -116,62 +113,79 @@ textarea {
     0 0 30px rgba(0, 120, 255, 0.08),
     inset 0 0 25px rgba(0, 170, 255, 0.03);
 
-  flex-shrink: 0;
-
-  animation: navAnimation 0.7s ease;
+  z-index: 1;
 }
+
 
 /* =========================================
    TRAVELING BORDER LIGHT
 ========================================= */
 
-.navbar::before {
-  content: "";
-
+.navbar-light {
   position: absolute;
 
-  width: 180%;
-  height: 180%;
+  width: 90px;
+  height: 90px;
 
-  left: -40%;
-  top: -40%;
+  background: #00eaff;
 
-  background: conic-gradient(
-    from 0deg,
+  border-radius: 50%;
 
-    transparent 0deg,
+  filter: blur(4px);
 
-    transparent 250deg,
+  box-shadow:
+    0 0 8px #00eaff,
+    0 0 18px #00eaff,
+    0 0 35px rgba(0, 220, 255, 0.9);
 
-    rgba(0, 217, 255, 0.05) 275deg,
+  z-index: 2;
 
-    rgba(0, 217, 255, 0.25) 290deg,
-
-    #00d9ff 300deg,
-
-    #ffffff 308deg,
-
-    #00d9ff 316deg,
-
-    rgba(0, 217, 255, 0.2) 330deg,
-
-    transparent 345deg,
-
-    transparent 360deg
+  offset-path: inset(
+    0 round 18px
   );
 
-  animation: travelLight 3.5s linear infinite;
+  offset-distance: 0%;
 
-  z-index: 1;
+  animation: borderLight 4s linear infinite;
 
   pointer-events: none;
 }
 
+
 /* =========================================
-   INNER NAVBAR GLASS
+   MASK THE LIGHT
 ========================================= */
 
-.navbar::after {
+.navbar-light::after {
+  content: "";
+
+  position: absolute;
+
+  width: 22px;
+  height: 22px;
+
+  left: 50%;
+  top: 50%;
+
+  transform: translate(-50%, -50%);
+
+  background: #ffffff;
+
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 8px #ffffff,
+    0 0 18px #00eaff,
+    0 0 30px #00eaff;
+}
+
+
+/* =========================================
+   IMPORTANT
+   COVER THE CENTER OF NAVBAR
+========================================= */
+
+.navbar::before {
   content: "";
 
   position: absolute;
@@ -182,39 +196,40 @@ textarea {
 
   background: rgba(3, 13, 28, 0.92);
 
-  box-shadow:
-    inset 0 0 25px rgba(0, 170, 255, 0.04);
-
-  z-index: 2;
+  z-index: 3;
 
   pointer-events: none;
 }
 
-/* =========================================
-   MOVING LIGHT ROTATION
-========================================= */
-
-@keyframes travelLight {
-
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
-
-}
 
 /* =========================================
-   NAVBAR CONTENT ABOVE ANIMATION
+   CONTENT ABOVE EVERYTHING
 ========================================= */
 
-.navbar > * {
+.navbar > .logo,
+.navbar > .nav-links {
   position: relative;
 
   z-index: 10;
 }
+
+
+/* =========================================
+   BORDER LIGHT ANIMATION
+========================================= */
+
+@keyframes borderLight {
+
+  0% {
+    offset-distance: 0%;
+  }
+
+  100% {
+    offset-distance: 100%;
+  }
+
+}
+
 
 /* =========================================
    LOGO
@@ -253,6 +268,7 @@ textarea {
 
   transform: translateY(-2px);
 }
+
 
 /* =========================================
    NAVIGATION
@@ -305,8 +321,9 @@ textarea {
     0 0 10px #00d9ff;
 }
 
+
 /* =========================================
-   HOME
+   HOME PAGE
 ========================================= */
 
 .home-page {
@@ -339,6 +356,18 @@ textarea {
   align-items: center;
 
   animation: heroAnimation 0.9s ease;
+
+  background: rgba(3, 13, 28, 0.25);
+
+  border: 1px solid rgba(0, 196, 255, 0.35);
+
+  backdrop-filter: blur(20px);
+
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 0 30px rgba(0, 120, 255, 0.08),
+    inset 0 0 25px rgba(0, 170, 255, 0.03);
 }
 
 .hero::after {
@@ -417,6 +446,7 @@ h1 span {
   margin-bottom: 30px;
 }
 
+
 /* =========================================
    BUTTONS
 ========================================= */
@@ -431,6 +461,7 @@ h1 span {
   display: inline-flex;
 
   align-items: center;
+
   justify-content: center;
 
   gap: 10px;
@@ -487,6 +518,7 @@ h1 span {
   transform: translateY(-3px);
 }
 
+
 /* =========================================
    INNER PAGES
 ========================================= */
@@ -515,6 +547,18 @@ h1 span {
   overflow: visible;
 
   animation: pageAnimation 0.7s ease;
+
+  background: rgba(3, 13, 28, 0.25);
+
+  border: 1px solid rgba(0, 196, 255, 0.35);
+
+  backdrop-filter: blur(20px);
+
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow:
+    0 0 30px rgba(0, 120, 255, 0.08),
+    inset 0 0 25px rgba(0, 170, 255, 0.03);
 }
 
 .page-heading {
@@ -529,11 +573,6 @@ h1 span {
   margin-bottom: 12px;
 }
 
-.heading-description {
-  color: #9fb4c4;
-
-  line-height: 1.6;
-}
 
 /* =========================================
    ABOUT
@@ -591,6 +630,10 @@ h1 span {
 
   padding: 20px;
 
+  background: rgba(3, 13, 28, 0.25);
+
+  border: 1px solid rgba(0, 196, 255, 0.35);
+
   transition: 0.3s ease;
 }
 
@@ -617,6 +660,7 @@ h1 span {
   font-size: 13px;
 }
 
+
 /* =========================================
    SKILLS
 ========================================= */
@@ -642,11 +686,13 @@ h1 span {
 
   justify-content: center;
 
-  position: relative;
-
   gap: 10px;
 
   transition: 0.3s ease;
+
+  background: rgba(3, 13, 28, 0.25);
+
+  border: 1px solid rgba(0, 196, 255, 0.35);
 }
 
 .skill-card:hover {
@@ -686,6 +732,7 @@ h1 span {
     0 0 8px #00d9ff;
 }
 
+
 /* =========================================
    PROJECTS
 ========================================= */
@@ -708,6 +755,10 @@ h1 span {
   gap: 30px;
 
   transition: 0.3s ease;
+
+  background: rgba(3, 13, 28, 0.25);
+
+  border: 1px solid rgba(0, 196, 255, 0.35);
 }
 
 .project-card:hover {
@@ -841,6 +892,7 @@ h1 span {
   transform: translateY(-3px);
 }
 
+
 /* =========================================
    CONTACT
 ========================================= */
@@ -937,6 +989,10 @@ h1 span {
   flex-direction: column;
 
   gap: 10px;
+
+  background: rgba(3, 13, 28, 0.25);
+
+  border: 1px solid rgba(0, 196, 255, 0.35);
 }
 
 .contact-form label {
@@ -985,6 +1041,7 @@ h1 span {
   margin-top: 10px;
 }
 
+
 /* =========================================
    ANIMATIONS
 ========================================= */
@@ -1030,6 +1087,7 @@ h1 span {
   }
 
 }
+
 
 /* =========================================
    TABLET
@@ -1112,40 +1170,61 @@ h1 span {
 
 }
 
+
 /* =========================================
    MOBILE
 ========================================= */
 
 @media (max-width: 600px) {
 
-  body {
-    overflow-x: hidden;
-
-    overflow-y: auto;
-  }
-
-  .page {
-    min-height: 100vh;
-
-    height: auto;
-  }
-
   .navbar {
+    width: calc(100% - 20px);
+
     height: 60px;
+
+    padding: 0 12px;
 
     border-radius: 15px;
   }
 
+  .navbar-glass {
+    border-radius: 15px;
+  }
+
+  .navbar::before {
+    border-radius: 13px;
+  }
+
   .nav-links {
-    gap: 10px;
+    gap: 8px;
   }
 
   .nav-link {
-    font-size: 10px;
+    font-size: 9px;
+  }
+
+  .logo {
+    font-size: 12px;
+
+    padding: 8px 10px;
+
+    letter-spacing: 2px;
   }
 
   .nav-link.active::after {
     bottom: -6px;
+  }
+
+  .navbar-light {
+    width: 70px;
+
+    height: 70px;
+  }
+
+  .navbar-light::after {
+    width: 18px;
+
+    height: 18px;
   }
 
   .hero {
@@ -1180,10 +1259,6 @@ h1 span {
 
   .page-card {
     width: 100%;
-
-    max-height: none;
-
-    overflow: visible;
 
     padding: 25px 20px;
   }
@@ -1241,4 +1316,4 @@ h1 span {
     padding: 20px;
   }
 
-                  }
+}
