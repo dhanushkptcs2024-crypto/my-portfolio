@@ -170,7 +170,8 @@ textarea {
 
   z-index: 10;
 
-  animation: nav-travel 6s linear infinite;
+  /* CHANGED 6s → 5s */
+  animation: nav-travel 5s linear infinite;
 }
 
 /* =================================
@@ -225,7 +226,8 @@ textarea {
 
   z-index: 9;
 
-  animation: nav-travel 6s linear infinite;
+  /* CHANGED 6s → 5s */
+  animation: nav-travel 5s linear infinite;
 }
 
 /* =================================
@@ -235,6 +237,7 @@ textarea {
 .navbar .logo,
 .navbar .nav-links {
   position: relative;
+
   z-index: 20;
 }
 
@@ -1146,6 +1149,7 @@ h1 span {
 
   .navbar {
     height: 60px;
+
     padding: 0 15px;
   }
 
