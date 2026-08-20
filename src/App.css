@@ -15,6 +15,8 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   background: #010308;
   color: white;
+
+  /* SCROLLING FIX */
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -30,9 +32,9 @@ textarea {
   font-family: inherit;
 }
 
-/* =================================
+/* ================================
    MAIN PAGE
-================================= */
+================================ */
 
 .page {
   width: 100%;
@@ -56,9 +58,9 @@ textarea {
   position: relative;
 }
 
-/* =================================
+/* ================================
    GLASS EFFECT
-================================= */
+================================ */
 
 .glass {
   background: rgba(3, 13, 28, 0.25);
@@ -73,25 +75,9 @@ textarea {
     inset 0 0 25px rgba(0, 170, 255, 0.03);
 }
 
-/* =================================
+/* ================================
    NAVBAR
-================================= */
-
-@property --nav-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
-
-@keyframes nav-travel {
-  from {
-    --nav-angle: 0deg;
-  }
-
-  to {
-    --nav-angle: 360deg;
-  }
-}
+================================ */
 
 .navbar {
   width: calc(100% - 70px);
@@ -111,139 +97,10 @@ textarea {
 
   flex-shrink: 0;
 
-  position: relative;
-
-  isolation: isolate;
-
   animation: navAnimation 0.7s ease;
 }
 
-/* =================================
-   TRAVELING PURPLE / BLUE / CYAN
-================================= */
-
-.navbar::before {
-  content: "";
-
-  position: absolute;
-
-  inset: -1.5px;
-
-  border-radius: 18px;
-
-  padding: 1.5px;
-
-  background: conic-gradient(
-    from var(--nav-angle),
-
-    transparent 0deg,
-    transparent 245deg,
-
-    oklch(0.65 0.21 300 / 0.35) 265deg,
-
-    oklch(0.65 0.21 300 / 0.75) 290deg,
-
-    oklch(0.68 0.19 255) 320deg,
-
-    oklch(0.78 0.18 225) 340deg,
-
-    oklch(0.90 0.16 197) 353deg,
-
-    oklch(0.98 0.06 197) 359deg,
-
-    transparent 360deg
-  );
-
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-
-  -webkit-mask-composite: xor;
-
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-
-  mask-composite: exclude;
-
-  pointer-events: none;
-
-  z-index: 10;
-
-  /* CHANGED 6s → 5s */
-  animation: nav-travel 5s linear infinite;
-}
-
-/* =================================
-   SOFT GLOW
-================================= */
-
-.navbar::after {
-  content: "";
-
-  position: absolute;
-
-  inset: -2px;
-
-  border-radius: 18px;
-
-  padding: 2px;
-
-  background: conic-gradient(
-    from var(--nav-angle),
-
-    transparent 0deg,
-    transparent 250deg,
-
-    oklch(0.65 0.21 300 / 0.12) 275deg,
-
-    oklch(0.65 0.21 300 / 0.30) 305deg,
-
-    oklch(0.68 0.19 255 / 0.42) 330deg,
-
-    oklch(0.90 0.16 197 / 0.65) 353deg,
-
-    transparent 360deg
-  );
-
-  -webkit-mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-
-  -webkit-mask-composite: xor;
-
-  mask:
-    linear-gradient(#000 0 0) content-box,
-    linear-gradient(#000 0 0);
-
-  mask-composite: exclude;
-
-  filter: blur(6px);
-
-  opacity: 0.8;
-
-  pointer-events: none;
-
-  z-index: 9;
-
-  /* CHANGED 6s → 5s */
-  animation: nav-travel 5s linear infinite;
-}
-
-/* =================================
-   KEEP LOGO AND LINKS ABOVE LIGHT
-================================= */
-
-.navbar .logo,
-.navbar .nav-links {
-  position: relative;
-
-  z-index: 20;
-}
-
-/* =================================
-   LOGO
-================================= */
+/* LOGO */
 
 .logo {
   padding: 11px 25px;
@@ -266,8 +123,6 @@ textarea {
     0 0 15px rgba(0, 190, 255, 0.22);
 
   transition: 0.3s ease;
-
-  flex-shrink: 0;
 }
 
 .logo:hover {
@@ -281,9 +136,7 @@ textarea {
   transform: translateY(-2px);
 }
 
-/* =================================
-   NAVIGATION
-================================= */
+/* NAVIGATION */
 
 .nav-links {
   display: flex;
@@ -332,9 +185,9 @@ textarea {
     0 0 10px #00d9ff;
 }
 
-/* =================================
+/* ================================
    HOME PAGE
-================================= */
+================================ */
 
 .home-page {
   flex: 1;
@@ -444,9 +297,9 @@ h1 span {
   margin-bottom: 30px;
 }
 
-/* =================================
+/* ================================
    BUTTONS
-================================= */
+================================ */
 
 .hero-buttons {
   display: flex;
@@ -515,9 +368,9 @@ h1 span {
   transform: translateY(-3px);
 }
 
-/* =================================
+/* ================================
    INNER PAGES
-================================= */
+================================ */
 
 .inner-page {
   flex: 1;
@@ -563,9 +416,9 @@ h1 span {
   line-height: 1.6;
 }
 
-/* =================================
+/* ================================
    ABOUT
-================================= */
+================================ */
 
 .about-content {
   display: grid;
@@ -645,9 +498,9 @@ h1 span {
   font-size: 13px;
 }
 
-/* =================================
+/* ================================
    SKILLS
-================================= */
+================================ */
 
 .skills-grid {
   display: grid;
@@ -714,9 +567,9 @@ h1 span {
     0 0 8px #00d9ff;
 }
 
-/* =================================
+/* ================================
    PROJECTS
-================================= */
+================================ */
 
 .projects-list {
   margin-top: 15px;
@@ -869,9 +722,9 @@ h1 span {
   transform: translateY(-3px);
 }
 
-/* =================================
+/* ================================
    CONTACT
-================================= */
+================================ */
 
 .contact-card {
   display: grid;
@@ -1013,9 +866,9 @@ h1 span {
   margin-top: 10px;
 }
 
-/* =================================
+/* ================================
    ANIMATIONS
-================================= */
+================================ */
 
 @keyframes navAnimation {
   from {
@@ -1053,9 +906,9 @@ h1 span {
   }
 }
 
-/* =================================
+/* ================================
    TABLET
-================================= */
+================================ */
 
 @media (max-width: 850px) {
   .navbar {
@@ -1132,25 +985,25 @@ h1 span {
   }
 }
 
-/* =================================
+/* ================================
    MOBILE
-================================= */
+================================ */
 
 @media (max-width: 600px) {
   body {
     overflow-x: hidden;
+
     overflow-y: auto;
   }
 
   .page {
     min-height: 100vh;
+
     height: auto;
   }
 
   .navbar {
     height: 60px;
-
-    padding: 0 15px;
   }
 
   .nav-links {
@@ -1163,14 +1016,6 @@ h1 span {
 
   .nav-link.active::after {
     bottom: -6px;
-  }
-
-  .logo {
-    font-size: 13px;
-
-    padding: 8px 11px;
-
-    letter-spacing: 2px;
   }
 
   .hero {
@@ -1265,4 +1110,4 @@ h1 span {
   .contact-form {
     padding: 20px;
   }
-  }
+}
