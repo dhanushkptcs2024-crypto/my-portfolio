@@ -45,7 +45,7 @@ function Contact() {
                 <div>
                   <small>Email</small>
                   <p>
-                    Your Email
+                    dhanushbajpe47@gmail.com
                   </p>
                 </div>
 
