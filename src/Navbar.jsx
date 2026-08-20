@@ -2,7 +2,9 @@ import React from "react";
 import { NavLink, Link } from "react-router-dom";
 
 function Navbar() {
+
   return (
+
     <nav className="navbar glass">
 
       <Link to="/" className="logo">
@@ -60,6 +62,7 @@ function Navbar() {
       </div>
 
     </nav>
+
   );
 }
 
